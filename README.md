@@ -1,4 +1,4 @@
-# PROJECT_NAME_HUMAN
+# PSDI Organic Toolkit
 
 [![License Badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -14,7 +14,7 @@ This is a template project for a PSDI project which deploys a Flask website, als
 
 One you have a new project, you'll want to do the following tasks:
 
-1. Replace the "PROJECT_NAME" placeholders throughout this project with the actual project name. This project provides a script to do this, at `scripts/rename_project.py`. You can run this through e.g.:
+1. Replace the "organic_toolkit_hub" placeholders throughout this project with the actual project name. This project provides a script to do this, at `scripts/rename_project.py`. You can run this through e.g.:
 
 ```bash
 $ python scripts/rename_project.py new-project-name New Project Name
@@ -35,7 +35,7 @@ If something went wrong, it's easiest to undo this through using git to revert t
 
 5. If you enabled the workflow to publish to GitHub Pages, you'll need to enable Pages in the project settings. To do this, go to the project page on GitHub, then Settings (in the top bar), Pages (in the left column), and in the "Source" section, select "GitHub Actions". Note GitHub pages is not compatible with a backend server; only pages to be served to the user will be rendered as part of the site
 
-6. If you enabled workflows to deploy to STFC infrastructure, you'll need to set up project runners, since these don't get copied over in the templating. These should follow the name pattern `PROJECT_NAME_HYPHEN-runners` (you can alternatively name them something else and then change the name in the workflow files to match). To do this, follow the guide at https://stfc.atlassian.net/wiki/spaces/P/pages/990216270/Creating+GitHub+repository+coupled+Runner+Scale+Sets.
+6. If you enabled workflows to deploy to STFC infrastructure, you'll need to set up project runners, since these don't get copied over in the templating. These should follow the name pattern `organic-toolkit-hub-runners` (you can alternatively name them something else and then change the name in the workflow files to match). To do this, follow the guide at https://stfc.atlassian.net/wiki/spaces/P/pages/990216270/Creating+GitHub+repository+coupled+Runner+Scale+Sets.
 
 ## Table of Contents
 
@@ -59,7 +59,7 @@ If something went wrong, it's easiest to undo this through using git to revert t
     - (Automated workflows for various tasks related to project maintenance)
 - `deploy`
   - (Files used as part of the deployment to STFC infrastructure)
-- `PROJECT_NAME` (Primary source directory)
+- `organic_toolkit_hub` (Primary source directory)
   - `static` (Static code and assets for the web app)
     - `img`
       - (Image assets for the web app)
@@ -158,7 +158,7 @@ In addition to the dependencies listed above, this project uses the assets made 
 
 ## Using the online app
 
-Enter https://PROJECT_NAME.psdi.ac.uk/ in a browser. Guidance on usage is given on each page of the website.
+Enter https://organic_toolkit_hub.psdi.ac.uk/ in a browser. Guidance on usage is given on each page of the website.
 
 ## Running the Python/Flask app locally
 
@@ -167,7 +167,7 @@ Enter https://PROJECT_NAME.psdi.ac.uk/ in a browser. Guidance on usage is given 
 This project is available on PyPI, and so can be installed via pip, including the necessary dependencies for the GUI, with:
 
 ```bash
-pip install PROJECT_NAME_HYPHEN'[gui]'
+pip install organic-toolkit-hub'[gui]'
 ```
 
 If you wish to install the project locally from source, this can be done most easily by cloning the project and then executing:
@@ -182,12 +182,12 @@ If your system does not allow installation in this manner, it may be necessary t
 
 ### Running the App
 
-Once installed, the command-line script `PROJECT_NAME_HYPHEN-gui` will be made available, which can be called to start the server. You can then access the website by going to <http://127.0.0.1:5000> in a browser (this will also be printed in the terminal, and you can CTRL+click it there to open it in your default browser). Guidance for using the app is given on each page of it. When you're finished with the app, key CTRL+C in the terminal where you called the script to shut down the server, or, if the process was backgrounded, kill the appropriate process.
+Once installed, the command-line script `organic-toolkit-hub-gui` will be made available, which can be called to start the server. You can then access the website by going to <http://127.0.0.1:5000> in a browser (this will also be printed in the terminal, and you can CTRL+click it there to open it in your default browser). Guidance for using the app is given on each page of it. When you're finished with the app, key CTRL+C in the terminal where you called the script to shut down the server, or, if the process was backgrounded, kill the appropriate process.
 
 In case of problems when using Chrome, try opening Chrome from the command line:
 open -a "Google Chrome.app" --args --allow-file-access-from-files
 
-The local version has some customisable options for running it, which can can be seen by running `PROJECT_NAME_HYPHEN-gui --help`.
+The local version has some customisable options for running it, which can can be seen by running `organic-toolkit-hub-gui --help`.
 
 ## Testing
 

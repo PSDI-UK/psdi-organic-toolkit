@@ -1,4 +1,4 @@
-# Changelog for PROJECT_NAME_HUMAN
+# Changelog for PSDI Organic Toolkit
 
 ## v0.1.0
 

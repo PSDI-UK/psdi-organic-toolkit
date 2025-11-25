@@ -1,4 +1,4 @@
-"""@file PROJECT_NAME/constants.py
+"""@file organic_toolkit_hub/constants.py
 
 Miscellaneous constant values used within this project.
 
@@ -31,10 +31,10 @@ import shutil
 # ---------
 
 # The name of the command-line script
-CL_SCRIPT_NAME = "PROJECT_NAME_HYPHEN"
+CL_SCRIPT_NAME = "organic-toolkit-hub"
 
 # The name of the Flask app
-APP_NAME = "PROJECT_NAME"
+APP_NAME = "organic_toolkit_hub"
 
 # Environmental variables
 LOG_MODE_EV = "LOG_MODE"

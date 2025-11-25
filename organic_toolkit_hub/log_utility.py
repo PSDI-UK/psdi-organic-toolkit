@@ -1,4 +1,4 @@
-"""@file PROJECT_NAME/logging.py
+"""@file organic_toolkit_hub/logging.py
 
 Functions and classes related to logging and other messaging for the user
 """

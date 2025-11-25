@@ -41,7 +41,7 @@ jobs:
           pip install .
 
       - name: Render Static Content
-        run: PROJECT_NAME_HYPHEN-render
+        run: organic-toolkit-hub-render
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

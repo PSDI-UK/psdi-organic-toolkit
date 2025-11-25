@@ -13,11 +13,11 @@ from typing import Any
 import werkzeug
 from flask import Flask, cli
 
-import PROJECT_NAME
-from PROJECT_NAME import constants as const
-from PROJECT_NAME.gui.env import get_env
-from PROJECT_NAME.gui.get import init_get
-from PROJECT_NAME.gui.post import init_post
+import organic_toolkit_hub
+from organic_toolkit_hub import constants as const
+from organic_toolkit_hub.gui.env import get_env
+from organic_toolkit_hub.gui.get import init_get
+from organic_toolkit_hub.gui.post import init_post
 
 _app: Flask | None = None
 
@@ -71,7 +71,7 @@ def start_app():
     old_cwd = os.getcwd()
 
     try:
-        os.chdir(os.path.join(PROJECT_NAME.__path__[0], ".."))
+        os.chdir(os.path.join(organic_toolkit_hub.__path__[0], ".."))
         get_app().run(debug=get_env().debug_mode)
     finally:
         # Return to the previous directory after running the app

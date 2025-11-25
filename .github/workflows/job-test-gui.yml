@@ -54,7 +54,7 @@ jobs:
         if: ${{ ! inputs.simple }}
         run: |
           if ${{ inputs.prod }}; then
-            export ORIGIN=https://PROJECT_NAME_HYPHEN.psdi.ac.uk/
+            export ORIGIN=https://organic-toolkit-hub.psdi.ac.uk/
           fi
           export GH_TOKEN=${{ github.token }}
           pytest tests/gui
@@ -62,7 +62,7 @@ jobs:
         if: ${{ inputs.simple }}
         run: |
           if ${{ inputs.prod }}; then
-            export ORIGIN=https://PROJECT_NAME_HYPHEN.psdi.ac.uk/
+            export ORIGIN=https://organic-toolkit-hub.psdi.ac.uk/
           fi
           export GH_TOKEN=${{ github.token }}
           pytest 'tests/gui/gui_test.py::test_initial_frontpage'

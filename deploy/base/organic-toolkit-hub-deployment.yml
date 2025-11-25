@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: PROJECT_NAME_HYPHEN
+  name: organic-toolkit-hub
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: PROJECT_NAME_HYPHEN
+      app: organic-toolkit-hub
   template:
     metadata:
       labels:
-        app: PROJECT_NAME_HYPHEN
+        app: organic-toolkit-hub
       annotations:
-        elastic.co/dataset: kubernetes.container_logs.PROJECT_NAME
+        elastic.co/dataset: kubernetes.container_logs.organic_toolkit_hub
     spec:
       affinity:
         podAntiAffinity:
@@ -24,11 +24,11 @@ spec:
                     - key: app
                       operator: In
                       values:
-                        - PROJECT_NAME_HYPHEN
+                        - organic-toolkit-hub
                 topologyKey: "kubernetes.io/hostname"
       containers:
-        - name: PROJECT_NAME_HYPHEN
-          image: PROJECT_NAME_HYPHEN
+        - name: organic-toolkit-hub
+          image: organic-toolkit-hub
           volumeMounts:
             - mountPath: /tmp
               name: uploads

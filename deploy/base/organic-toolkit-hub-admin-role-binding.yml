@@ -2,11 +2,11 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: PROJECT_NAME_HYPHEN-admin-role-binding
+  name: organic-toolkit-hub-admin-role-binding
 subjects:
   - kind: ServiceAccount
-    name: PROJECT_NAME_HYPHEN-admin-sa
+    name: organic-toolkit-hub-admin-sa
 roleRef:
   kind: Role
-  name: PROJECT_NAME_HYPHEN-admin-role
+  name: organic-toolkit-hub-admin-role
   apiGroup: rbac.authorization.k8s.io
