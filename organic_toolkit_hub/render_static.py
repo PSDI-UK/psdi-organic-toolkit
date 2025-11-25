@@ -7,12 +7,11 @@ import os
 import shutil
 from argparse import ArgumentParser
 
+import psdi_organic_toolkit
 from flask import render_template
-
-import organic_toolkit_hub
-from organic_toolkit_hub.gui.env import update_env
-from organic_toolkit_hub.gui.get import d_pages
-from organic_toolkit_hub.gui.setup import get_app
+from psdi_organic_toolkit.gui.env import update_env
+from psdi_organic_toolkit.gui.get import d_pages
+from psdi_organic_toolkit.gui.setup import get_app
 
 DEFAULT_TARGET_DIR = "public"
 DEFAULT_SERVER_ROOT = "psdi-uk.github.io/"
@@ -28,7 +27,7 @@ def main():
                         help="The desired directory (absolute or relative to where this script is run from) to render"
                         "the site to")
 
-    parser.add_argument("--server-name", "-s", type=str, default=DEFAULT_SERVER_ROOT + "organic-toolkit-hub",
+    parser.add_argument("--server-name", "-s", type=str, default=DEFAULT_SERVER_ROOT + "psdi-organic-toolkit",
                         help="The name of the server this will be deployed to, which will be used in constructing "
                         "absolute URLs")
 
@@ -64,13 +63,13 @@ def main():
         raise FileNotFoundError(f"Unable to create directory {output_dir}")
 
     # Get the location of the project's root directory
-    project_dir = os.path.abspath(os.path.join(organic_toolkit_hub.__path__[0], ".."))
+    project_dir = os.path.abspath(os.path.join(psdi_organic_toolkit.__path__[0], ".."))
 
     # Copy over the static contents directly to the output directory
     target_static_dir = os.path.join(output_dir, "static")
     if os.path.exists(target_static_dir):
         shutil.rmtree(target_static_dir)
-    shutil.copytree(os.path.join(project_dir, "organic_toolkit_hub/static"),
+    shutil.copytree(os.path.join(project_dir, "psdi_organic_toolkit/static"),
                     target_static_dir)
 
     # Start the app so we're able to render pages

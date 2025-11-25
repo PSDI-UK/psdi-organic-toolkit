@@ -1,4 +1,4 @@
-"""@file organic_toolkit_hub/constants.py
+"""@file psdi_organic_toolkit/constants.py
 
 Miscellaneous constant values used within this project.
 
@@ -31,10 +31,10 @@ import shutil
 # ---------
 
 # The name of the command-line script
-CL_SCRIPT_NAME = "organic-toolkit-hub"
+CL_SCRIPT_NAME = "psdi-organic-toolkit"
 
 # The name of the Flask app
-APP_NAME = "organic_toolkit_hub"
+APP_NAME = "psdi_organic_toolkit"
 
 # Environmental variables
 LOG_MODE_EV = "LOG_MODE"

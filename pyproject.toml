@@ -3,7 +3,7 @@ requires = ["hatchling==1.27.0", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "organic_toolkit_hub"
+name = "psdi_organic_toolkit"
 authors = [
   # Add your name and email here
   { name = "Bryan Gillis", email = "7204836+brgillis@users.noreply.github.com" },
@@ -52,18 +52,18 @@ doc = ["pdoc3", "gunicorn", "pytest", "selenium"]
 plots = ["matplotlib"]
 
 [project.scripts]
-organic-toolkit-hub-gui = "organic_toolkit_hub.main_gui:main"
-organic-toolkit-hub-render = "organic_toolkit_hub.render_static:main"
+psdi-organic-toolkit-gui = "psdi_organic_toolkit.main_gui:main"
+psdi-organic-toolkit-render = "psdi_organic_toolkit.render_static:main"
 
 [project.urls]
-Homepage = "https://organic-toolkit-hub.psdi.ac.uk/"
-Documentation = "https://psdi-uk.github.io/organic-toolkit-hub/"
-Issues = "https://github.com/PSDI-UK/organic-toolkit-hub/issues"
-Changelog = "https://github.com/PSDI-UK/organic-toolkit-hub/blob/main/CHANGELOG.md"
+Homepage = "https://psdi-organic-toolkit.psdi.ac.uk/"
+Documentation = "https://psdi-uk.github.io/psdi-organic-toolkit/"
+Issues = "https://github.com/PSDI-UK/psdi-organic-toolkit/issues"
+Changelog = "https://github.com/PSDI-UK/psdi-organic-toolkit/blob/main/CHANGELOG.md"
 
 # Repository currently isn't public - when it goes public, uncomment the below
-# Repository = "https://github.com/PSDI-UK/organic-toolkit-hub"
-# Download = "https://github.com/PSDI-UK/organic-toolkit-hub/releases/latest"
+# Repository = "https://github.com/PSDI-UK/psdi-organic-toolkit"
+# Download = "https://github.com/PSDI-UK/psdi-organic-toolkit/releases/latest"
 
 [tool.hatch.build]
 exclude = [
@@ -78,7 +78,7 @@ exclude = [
 pythonpath = ["."]
 
 [tool.coverage.run]
-source_pkgs = ["organic_toolkit_hub"]
+source_pkgs = ["psdi_organic_toolkit"]
 branch = true
 # main_gui.py is tested via the Selenium tests, which are indirect enough that the coverage tool doesn't pick up that the
 # lines are being tested, so we exclude it from the coverage % calculation

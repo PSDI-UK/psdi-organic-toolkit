@@ -1,4 +1,4 @@
-"""@file organic_toolkit_hub/logging.py
+"""@file psdi_organic_toolkit/logging.py
 
 Functions and classes related to logging and other messaging for the user
 """

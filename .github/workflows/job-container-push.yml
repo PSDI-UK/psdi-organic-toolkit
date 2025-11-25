@@ -17,7 +17,7 @@ on:
 
 jobs:
   container-push:
-    runs-on: organic-toolkit-hub-runners
+    runs-on: psdi-organic-toolkit-runners
     steps:
       - uses: actions/checkout@v6
         with:
@@ -39,7 +39,7 @@ jobs:
           GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker build API
         env:
-          IMAGE_NAME: "ghcr.io/psdi-uk/organic_toolkit_hub/organic_toolkit_hub:${{ inputs.container_tag }}"
+          IMAGE_NAME: "ghcr.io/psdi-uk/psdi_organic_toolkit/psdi_organic_toolkit:${{ inputs.container_tag }}"
         run: |
           SHA=`git log -n 1 | head -n 1 | awk '{print($2)}'`
           TAG=`git tag --sort -version:refname | head -n 1`

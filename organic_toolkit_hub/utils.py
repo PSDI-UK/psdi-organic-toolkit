@@ -8,7 +8,7 @@ Miscellaneous utility functions used by this project
 import sys
 import textwrap
 
-from organic_toolkit_hub.constants import TERM_WIDTH
+from psdi_organic_toolkit.constants import TERM_WIDTH
 
 
 class TextColors:

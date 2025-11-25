@@ -3,6 +3,6 @@
 Entry-point module for when Flask is called directly to start the server
 """
 
-from organic_toolkit_hub.gui.setup import get_app
+from psdi_organic_toolkit.gui.setup import get_app
 
 app = get_app()

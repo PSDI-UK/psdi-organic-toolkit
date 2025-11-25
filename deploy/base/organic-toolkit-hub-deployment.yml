@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: organic-toolkit-hub
+  name: psdi-organic-toolkit
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: organic-toolkit-hub
+      app: psdi-organic-toolkit
   template:
     metadata:
       labels:
-        app: organic-toolkit-hub
+        app: psdi-organic-toolkit
       annotations:
-        elastic.co/dataset: kubernetes.container_logs.organic_toolkit_hub
+        elastic.co/dataset: kubernetes.container_logs.psdi_organic_toolkit
     spec:
       affinity:
         podAntiAffinity:
@@ -24,11 +24,11 @@ spec:
                     - key: app
                       operator: In
                       values:
-                        - organic-toolkit-hub
+                        - psdi-organic-toolkit
                 topologyKey: "kubernetes.io/hostname"
       containers:
-        - name: organic-toolkit-hub
-          image: organic-toolkit-hub
+        - name: psdi-organic-toolkit
+          image: psdi-organic-toolkit
           volumeMounts:
             - mountPath: /tmp
               name: uploads

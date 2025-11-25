@@ -1,4 +1,4 @@
-"""@file organic_toolkit_hub/file_io.py
+"""@file psdi_organic_toolkit/file_io.py
 
 Functions and classes related to general filesystem input/output
 """
@@ -6,12 +6,12 @@ Functions and classes related to general filesystem input/output
 import os
 from functools import lru_cache
 
-from organic_toolkit_hub import constants as const
+from psdi_organic_toolkit import constants as const
 
 
 @lru_cache(maxsize=1)
 def get_package_path() -> str:
-    """Gets the absolute path to where the `organic_toolkit_hub` package is on disk
+    """Gets the absolute path to where the `psdi_organic_toolkit` package is on disk
 
     Returns
     -------

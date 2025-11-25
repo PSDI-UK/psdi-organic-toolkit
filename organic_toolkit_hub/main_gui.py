@@ -5,9 +5,9 @@ This script acts as a server for the PSDI Organic Toolkit website.
 
 from argparse import ArgumentParser
 
-from organic_toolkit_hub.gui.env import update_env
-from organic_toolkit_hub.gui.setup import start_app
-from organic_toolkit_hub.utils import print_wrap
+from psdi_organic_toolkit.gui.env import update_env
+from psdi_organic_toolkit.gui.setup import start_app
+from psdi_organic_toolkit.utils import print_wrap
 
 
 def main():

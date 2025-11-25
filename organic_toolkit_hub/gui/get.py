@@ -7,8 +7,7 @@ functions to return rendered templates.
 
 
 from flask import Flask, render_template
-
-from organic_toolkit_hub.gui.env import get_env_kwargs
+from psdi_organic_toolkit.gui.env import get_env_kwargs
 
 
 def index():

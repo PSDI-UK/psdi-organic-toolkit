@@ -2,11 +2,11 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: organic-toolkit-hub-admin-role-binding
+  name: psdi-organic-toolkit-admin-role-binding
 subjects:
   - kind: ServiceAccount
-    name: organic-toolkit-hub-admin-sa
+    name: psdi-organic-toolkit-admin-sa
 roleRef:
   kind: Role
-  name: organic-toolkit-hub-admin-role
+  name: psdi-organic-toolkit-admin-role
   apiGroup: rbac.authorization.k8s.io

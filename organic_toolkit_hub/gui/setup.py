@@ -10,14 +10,13 @@ from collections.abc import Callable
 from functools import wraps
 from typing import Any
 
+import psdi_organic_toolkit
 import werkzeug
 from flask import Flask, cli
-
-import organic_toolkit_hub
-from organic_toolkit_hub import constants as const
-from organic_toolkit_hub.gui.env import get_env
-from organic_toolkit_hub.gui.get import init_get
-from organic_toolkit_hub.gui.post import init_post
+from psdi_organic_toolkit import constants as const
+from psdi_organic_toolkit.gui.env import get_env
+from psdi_organic_toolkit.gui.get import init_get
+from psdi_organic_toolkit.gui.post import init_post
 
 _app: Flask | None = None
 
@@ -71,7 +70,7 @@ def start_app():
     old_cwd = os.getcwd()
 
     try:
-        os.chdir(os.path.join(organic_toolkit_hub.__path__[0], ".."))
+        os.chdir(os.path.join(psdi_organic_toolkit.__path__[0], ".."))
         get_app().run(debug=get_env().debug_mode)
     finally:
         # Return to the previous directory after running the app

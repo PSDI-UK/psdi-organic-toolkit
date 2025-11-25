@@ -11,8 +11,8 @@ from subprocess import run
 from traceback import format_exc
 from typing import TypeVar
 
-from organic_toolkit_hub import constants as const
-from organic_toolkit_hub import log_utility
+from psdi_organic_toolkit import constants as const
+from psdi_organic_toolkit import log_utility
 
 
 class SiteEnv:
