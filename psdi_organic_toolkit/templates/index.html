@@ -4,23 +4,51 @@
 
 {% block head %}
 {{ super() }}
-
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
 {% endblock %}
 
 {% block hero_title %}PSDI Organic Toolkit{% endblock %}
 
+{% block outer_content %}
+<div class="secondary">
+  <div class="max-width-box">
+    <p>The PSDI Organic Toolkit is a suite of web apps to support organic chemistry researchers in transparent and
+      high-quality data-reporting. Please click any panel below to access an app.</p>
+  </div>
+</div>
+
+{{ super() }}
+
+{% endblock %}
+
 {% block inner_content %}
-<ul>
-  <li>
-    <strong><a href="https://psdi-uk.github.io/psdi-variability-plot/">PSDI Variability Plot Generator</a>:</strong> Web
-    tool to produce plots that describe the reproducibility of a numerical reaction outcome. The generated scatterplots
-    display mean values and confidence intervals and can be exported to use in your supplementary information.
-  </li>
-  <li>
-    <strong><a href="https://psdi-uk.github.io/psdi-glorius-plot/">PSDI Glorius Plot Generator</a>:</strong> Web tool to
-    visualise the sensitivity of a given chemical transformation to user-defined reaction conditions. The output plots
-    are closely based on an <a href="https://onlinelibrary.wiley.com/doi/10.1002/anie.201901935" target="_blank">
-      original concept from the Glorius research group</a>.
-  </li>
-</ul>
+
+<a href="https://psdi-uk.github.io/psdi-variability-plot/" class="tool-container">
+  <div class="tool-image-container">
+    <img src="{{url_for('static', filename='img/t1-variability-plot-simple.png')}}"
+      alt="Example image of a generated variability plot" class="tool-image">
+  </div>
+  <div class="tool-title-and-description">
+    <h2 class="tool-title">PSDI Variability Plot Generator</h2>
+    <div class="tool-description">
+      <p>Web tool to produce plots that describe the reproducibility of a numerical reaction outcome. The output
+        scatterplots display the mean value of the outcome and its associated confidence interval.</p>
+    </div>
+  </div>
+  <img src="{{url_for('static', filename='img/resource-container-arrow.svg')}}" alt="Arrow icon" class="resource-arrow">
+</a>
+<a href="https://psdi-uk.github.io/psdi-glorius-plot/" class="tool-container">
+  <div class="tool-image-container">
+    <img src="{{url_for('static', filename='img/t2-glorius-plot-simple.png')}}"
+      alt="Example image of a generated Glorius plot" class="tool-image">
+  </div>
+  <div class="tool-title-and-description">
+    <h2 class="tool-title">PSDI Glorius Plot Generator</h2>
+    <div class="tool-description">
+      <p>Web tool to visualise the sensitivity of a given chemical transformation to user-defined reaction conditions.
+        The output plots are closely based on an original concept from the Glorius research group.</p>
+    </div>
+  </div>
+  <img src="{{url_for('static', filename='img/resource-container-arrow.svg')}}" alt="Arrow icon" class="resource-arrow">
+</a>
 {% endblock %}
