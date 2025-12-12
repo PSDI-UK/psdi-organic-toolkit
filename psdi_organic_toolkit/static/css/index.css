@@ -43,7 +43,8 @@ a.tool-container:hover .tool-title {
 
 .tool-image-container {
   height         : 7.5rem;
-  width          : 11.25rem;
+  width          : 7.5rem;
+  margin-left    : 0.5rem;
   display        : flex;
   flex-direction : column;
   justify-content: center;
