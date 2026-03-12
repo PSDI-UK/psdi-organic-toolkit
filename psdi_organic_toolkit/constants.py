@@ -48,6 +48,8 @@ TAG_EV = "TAG"
 TAG_SHA_EV = "TAG_SHA"
 SHA_EV = "SHA"
 
+REL_URL_PATH_EV = "REL_URL_PATH"
+
 
 # Logging and Formatting
 # ----------------------
