@@ -10,9 +10,10 @@ from collections.abc import Callable
 from functools import wraps
 from typing import Any
 
-import psdi_organic_toolkit
 import werkzeug
 from flask import Flask, cli
+
+import psdi_organic_toolkit
 from psdi_organic_toolkit import constants as const
 from psdi_organic_toolkit.gui.env import get_env
 from psdi_organic_toolkit.gui.get import init_get
@@ -37,13 +38,19 @@ def _patch_flask_warning():
     cli.show_server_banner = lambda *_: None
 
 
+def _get_flask_kwargs() -> dict[str, Any]:
+    """Get the kwargs we want to pass to the initialisation of the Flask app based on env settings"""
+
+    return {}
+
+
 def _init_app():
     """Create and return the Flask app with appropriate settings"""
 
     # Suppress Flask's warning, since we're using the dev server as a GUI
     _patch_flask_warning()
 
-    app = Flask(const.APP_NAME)
+    app = Flask(const.APP_NAME, **_get_flask_kwargs())
 
     # Connect the app to the various pages and methods of the website
     init_get(app)
@@ -74,4 +81,5 @@ def start_app():
         get_app().run(debug=get_env().debug_mode)
     finally:
         # Return to the previous directory after running the app
+        os.chdir(old_cwd)
         os.chdir(old_cwd)

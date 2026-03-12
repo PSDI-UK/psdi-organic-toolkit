@@ -7,9 +7,12 @@ This module handles setting up and storing the state of the environment for the 
 import os
 import sys
 from argparse import Namespace
+from datetime import date
 from subprocess import run
 from traceback import format_exc
 from typing import TypeVar
+
+from flask import url_for
 
 from psdi_organic_toolkit import constants as const
 from psdi_organic_toolkit import log_utility
@@ -42,13 +45,21 @@ class SiteEnv:
                                                       default=False)
         """True if the app is running in debug mode, False if not"""
 
-        tag, sha = self._determine_tag_and_sha()
+        tag, sha, commit_date = self._determine_tag_sha_date()
 
         self.tag: str = tag
         """The latest tag in the repo"""
 
         self.sha: str = sha
         """The SHA of the latest commit, if the latest commit isn't tagged, otherwise an empty string"""
+
+        self.date: date = commit_date
+        """The date of the latest commit"""
+
+        self.rel_url_path: str = self._determine_value(ev=const.REL_URL_PATH_EV,
+                                                       arg=None,
+                                                       value_type=str,
+                                                       default="")
 
         self._kwargs: dict[str, str] | None = None
         """Cached value for dict containing all env values"""
@@ -98,8 +109,8 @@ class SiteEnv:
 
         return value_type(ev_value)
 
-    def _determine_tag_and_sha(self) -> tuple[str, str]:
-        """Get latest tag and SHA of latest commit, if the latest commit differs from the latest tagged commit
+    def _determine_tag_sha_date(self) -> tuple[str, str, date]:
+        """Get latest tag, SHA, and date of latest commit, if the latest commit differs from the latest tagged commit
         """
 
         # Get the tag of the latest commit
@@ -162,7 +173,26 @@ class SiteEnv:
         if tag_sha == sha:
             sha = ""
 
-        return (tag, sha)
+        # Get the date of the latest commit
+        ev_commit_date = os.environ.get(const.DATE_EV)
+        if ev_commit_date:
+            commit_date: date | None = ev_commit_date
+        else:
+            try:
+                time_cmd = ("git log -n 1 --pretty=reference | head -n 1 | gawk '{print($NF)}' " +
+                            "| gawk '{print substr($0, 1, length($0)-1)}'")
+
+                time_out_bytes = run(time_cmd, shell=True, capture_output=True).stdout
+                time_str = str(time_out_bytes.decode()).strip()
+                commit_date = date(*map(int, time_str.split("-")))
+
+            except Exception:
+                # Another failsafe block, same reason as before
+                print("ERROR: Could not determine date for most recent tag. Error was:\n" + format_exc(),
+                      file=sys.stderr)
+                commit_date = None
+
+        return (tag, sha, commit_date)
 
 
 _env: SiteEnv | None = None
@@ -185,6 +215,28 @@ def update_env(args: Namespace | None = None):
     _env = SiteEnv(args)
 
 
+def custom_url_for(*args, **kwargs):
+    """Custom implementation of Flask's url_for which prepends the URL with a relative path"""
+    url = url_for(*args, **kwargs)
+    if url.startswith("/"):
+        url = url[1:]
+    url = os.path.join(get_env().rel_url_path, url)
+    if not (url.startswith("/") or url.startswith("http://") or url.startswith("https://")):
+        url = "/" + url
+    return url
+
+
+def get_url(page_url):
+    url = url_for("static", filename="../"+page_url)
+    url = url.replace("static/../", "")
+    if url.startswith("/"):
+        url = url[1:]
+    url = os.path.join(get_env().rel_url_path, url.replace("static/...", ""))
+    if not (url.startswith("/") or url.startswith("http://") or url.startswith("https://")):
+        url = "/" + url
+    return url
+
+
 def get_env_kwargs():
     """Get a dict of kwargs for the environment
     """
@@ -192,5 +244,9 @@ def get_env_kwargs():
     env = get_env()
 
     kwargs = env.kwargs
+
+    # Add a function to get a URL, taking into account the static URL path
+    kwargs["url_for"] = custom_url_for
+    kwargs["get_url"] = get_url
 
     return kwargs
