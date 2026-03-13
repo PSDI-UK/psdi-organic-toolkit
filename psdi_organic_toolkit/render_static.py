@@ -7,9 +7,10 @@ import os
 import shutil
 from argparse import ArgumentParser
 
-import psdi_organic_toolkit
 from flask import render_template
-from psdi_organic_toolkit.gui.env import update_env
+
+import psdi_organic_toolkit
+from psdi_organic_toolkit.gui.env import get_env_kwargs, update_env
 from psdi_organic_toolkit.gui.get import d_pages
 from psdi_organic_toolkit.gui.setup import get_app
 
@@ -89,12 +90,10 @@ def main():
             qualified_path = os.path.join(output_dir, stripped_path)
 
             # Fix any relative links in the page, since the structure here will be a bit different
-            page_content = render_template(stripped_path)
-            page_content = page_content.replace("../", "./")
+            page_content = render_template(stripped_path, **get_env_kwargs())
 
             open(qualified_path, "w").write(page_content)
 
 
 if __name__ == "__main__":
-    main()
     main()
