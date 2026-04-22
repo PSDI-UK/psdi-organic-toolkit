@@ -52,68 +52,12 @@ jobs:
   # The downstream deploy job leverages on Environment specific secrets, which also must be defined
   # TODO: Uncomment the below section once the deployment repo is set up
   # deploy-stfc-staging-k8s:
-  #   needs: [tag]
-  #   uses: PSDI-UK/psdi-organic-toolkit-deployment/.github/workflows/job-external-deployment.yaml
+  #   needs: [tag, container-push]
+  #   uses: PSDI-UK/psdi-organic-toolkit-deployment/.github/workflows/job-external-deployment.yaml@(REPLACE with commit SHA here)
   #   with:
   #     # container_tag
-  #     container_tag: ${{ github.sha }}
+  #     container_tag: ${{ needs.tag.outputs.container_tag }}
   #     environment: staging
   #   secrets:
   #     deployment_app_id: ${{ secrets.DEPLOYMENT_APP_ID }}
   #     deployment_app_private_key: ${{ secrets.DEPLOYMENT_APP_PRIVATE_KEY }}
-
-  build:
-    needs: [tag]
-    name: Build distribution 📦
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.x"
-      - name: Install pypa/build
-        run: >-
-          python3 -m
-          pip install
-          build
-          --user
-      - name: Build a binary wheel and a source tarball
-        run: python3 -m build
-      - name: Store the distribution packages
-        uses: actions/upload-artifact@v7
-        with:
-          name: python-package-distributions
-          path: dist/
-
-  publish-to-testpypi:
-    name: Publish Python 🐍 distribution 📦 to TestPyPI
-    needs:
-      - build
-    runs-on: ubuntu-latest
-
-    # When ready to enable this step, remove the following line
-    if: false
-
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/psdi_organic_toolkit
-
-    permissions:
-      id-token: write # IMPORTANT: mandatory for trusted publishing
-
-    steps:
-      - name: Download all the dists
-        uses: actions/download-artifact@v8
-        with:
-          name: python-package-distributions
-          path: dist/
-      - name: Publish distribution 📦 to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
-          verbose: true
