@@ -61,9 +61,6 @@ ENV REL_URL_PATH=$REL_URL_PATH
 
 EXPOSE 8000
 
-RUN mkdir -p /app/psdi_organic_toolkit/static/uploads
-RUN mkdir -p /app/psdi_organic_toolkit/static/downloads
-
 #set web server timout to more than application default (60)
 ENV TIMEOUT=90
 
