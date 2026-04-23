@@ -2,12 +2,6 @@
 
 [![License Badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-<!-- The following line can be commented out to add a coverage badge here once a gist has been created for it. See the
-tutorial at https://nedbatchelder.com/blog/202209/making_a_coverage_badge.html, and also enable the code to generate
-the badge in the .github/job-test-main.yaml workflow-->
-
-<!-- ![Coverage Badge](https://img.shields.io/endpoint?url=[GIST_URL]/covbadge.json) -->
-
 This projects provides the code for a Flask-hosted page to provide a hub for Organic Toolkit projects, pointing to the site for each of them.
 
 For internal testing, the main branch of this project is published to https://psdi-uk.github.io/psdi-organic-toolkit
@@ -64,7 +58,7 @@ For internal testing, the main branch of this project is published to https://ps
 
 ### Python
 
-Any local installation of this project requires Python 3.12 or greater. The best way to do this is dependant on your system, and you are likely to find the best tailored instructions by searching the web for e.g. "install Python 3.12 <your-os-or-distribution>". Some standard options are:
+Any local installation of this project requires Python 3.11 or greater. The best way to do this is dependant on your system, and you are likely to find the best tailored instructions by searching the web for e.g. "install Python 3.11 <your-os-or-distribution>". Some standard options are:
 
 For Windows and MacOS: Download and run the installer for the latest version from the official site: https://www.python.org/downloads/
 
@@ -104,11 +98,11 @@ sudo apt install python3-pip
 If this doesn't work, or the version installed is too low, an alternative is to install Python via the Anaconda package manager. For this, see the guide here: https://www.askpython.com/python/examples/install-python-with-conda. If you already have an earlier version of Python installed with Anaconda, you can install and activate a newer version with a command such as:
 
 ```bash
-conda create --name myenv python=3.12 anaconda # Where 'myenv' is a possible conda environment name
+conda create --name myenv python=3.11 anaconda # Where 'myenv' is a possible conda environment name
 conda activate myenv
 ```
 
-You can also install a newer version of Python if you wish by substituting "3.12" in the above with e.g. "3.13".
+You can also install a newer version of Python if you wish by substituting "3.11" in the above with e.g. "3.13".
 
 ### Other Dependencies
 
@@ -133,7 +127,7 @@ In addition to the dependencies listed above, this project uses the assets made 
 
 ## Using the online app
 
-Enter https://psdi_organic_toolkit.psdi.ac.uk/ in a browser. Guidance on usage is given on each page of the website.
+Enter https://organic-toolkit.psdi.ac.uk/ in a browser.
 
 ## Running the Python/Flask app locally
 
@@ -193,7 +187,6 @@ This section presents solutions for commonly-encountered issues.
 
 ## Contributors
 
-- (Add your name here)
 - Bryan Gillis (7204836+brgillis@users.noreply.github.com)
 
 ## Funding

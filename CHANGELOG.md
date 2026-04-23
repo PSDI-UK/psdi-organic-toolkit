@@ -2,9 +2,4 @@
 
 ## v0.1.0
 
-Example notes:
-
-Initial public release. Features included:
-
-- Online server functionality
-- Locally-hosted server
+Initial public release, providing links to Variability Plot Generator and Glorius Plot Generator

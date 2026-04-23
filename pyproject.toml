@@ -8,7 +8,7 @@ authors = [
   # Add your name and email here
   { name = "Bryan Gillis", email = "7204836+brgillis@users.noreply.github.com" },
 ]
-description = "TODO: Project Description"
+description = "Flask-hosted web site to link to PSDI's various Organic Toolkit services."
 readme = "README.md"
 # List keywords relevant to your project here. There's no official list, so include ones you think are relevant and will
 # help find your project in searches, e.g. ["chemistry", "PSDI"]
@@ -26,7 +26,7 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Chemistry",
 ]
 dependencies = ["Flask"]
-requires-python = ">= 3.12"
+requires-python = ">= 3.11"
 
 # Version specification - we determine the version through git. If you wish to install this without it being in a git
 # repository, you can do so by uncommenting the next line, then commenting out the block below which specifies how to
@@ -56,14 +56,14 @@ psdi-organic-toolkit-gui = "psdi_organic_toolkit.main_gui:main"
 psdi-organic-toolkit-render = "psdi_organic_toolkit.render_static:main"
 
 [project.urls]
-Homepage = "https://psdi-organic-toolkit.psdi.ac.uk/"
-Documentation = "https://psdi-uk.github.io/psdi-organic-toolkit/"
+Homepage = "https://organic-toolkit.psdi.ac.uk/"
+Documentation = "https://guidance.psdi.ac.uk/docusaurus-pages/docs/guidance/psdi-resources/organic-toolkit/"
 Issues = "https://github.com/PSDI-UK/psdi-organic-toolkit/issues"
 Changelog = "https://github.com/PSDI-UK/psdi-organic-toolkit/blob/main/CHANGELOG.md"
 
 # Repository currently isn't public - when it goes public, uncomment the below
-# Repository = "https://github.com/PSDI-UK/psdi-organic-toolkit"
-# Download = "https://github.com/PSDI-UK/psdi-organic-toolkit/releases/latest"
+Repository = "https://github.com/PSDI-UK/psdi-organic-toolkit"
+Download = "https://github.com/PSDI-UK/psdi-organic-toolkit/releases/latest"
 
 [tool.hatch.build]
 exclude = [
