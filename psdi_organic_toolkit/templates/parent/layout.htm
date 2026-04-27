@@ -1,0 +1,105 @@
+<!--
+  Layout template for all pages
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  {% block head %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block page_title %}PROJECT_NAME_HUMAN{% endblock %}</title>
+  <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='img/psdi-icon-dark.svg')}}">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lexend:400" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/psdi-common.css')}}">
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <script type="module" src="{{url_for('static', filename='js/cookieconsent-config.js')}}"></script>
+
+  <script type="module" src="{{url_for('static', filename='js/psdi-common.js')}}"></script>
+  {% if ga_tag %}
+  {% if service_mode %}
+  <!-- Google tag (gtag.js) -->
+  <script type="text/plain" data-category="analytics" async
+    src="https://www.googletagmanager.com/gtag/js?id={{ ga_tag }}"></script>
+  <script type="text/plain" data-category="analytics">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '{{ ga_tag }}');
+  </script>
+  {% else %}
+  <script type="text/plain" data-category="analytics">
+    // Define gtag as a logging function instead
+    function gtag(type, eventClass, data=null){
+      if (type==="event"){
+        let logStr = "Analytics event of class '" + eventClass + "' triggered";
+        if (!data) {
+          logStr += ".";
+        } else {
+          logStr += " with data:";
+          Object.entries(data).forEach(([key, val]) => {
+            logStr += "\n  " + key + ": " + val;
+          });
+        }
+        console.log(logStr);
+      }
+    }
+  </script>
+  {% endif %}
+  {% endif %}
+  {% endblock %}
+</head>
+
+<body marginwidth="0">
+  {% block body %}
+
+  <!-- Cover to hide element loading and make page transitions seem smoother -->
+  <div id="cover"></div>
+
+  {% block announcement %}
+  <!-- Announcement bar: Uncomment and fill in when needed to announce things such as downtime -->
+  <!-- <div class="announcementBar_mb4j mathjax_ignore" role="banner">
+    <div class="max-width-box announcementBarContent_xLdY">
+    </div>
+  </div> -->
+  {% endblock %}
+
+  {% block header %}
+  <header class="header" id="psdi-header">
+    {% include 'content/psdi-common-header.html' %}
+  </header>
+  {% endblock %}
+
+  {% block hero_banner %}
+  <div class="hero">
+    <div class="max-width-box">
+      <h1 class="hero__title marginless_header">{% block hero_title %}{% endblock %}</h1>
+    </div>
+  </div>
+  {% endblock %}
+
+  {% block outer_content %}
+  <div name="content">
+    <div class="max-width-box">
+      {% block inner_content %}{% endblock %}
+    </div>
+  </div>
+  {% endblock %}
+
+  {% block footer %}
+  <footer class="footer" id="psdi-footer">
+    {% include 'content/psdi-common-footer.html' %}
+  </footer>
+  {% endblock %}
+
+  {% endblock %}
+</body>
+
+</html>

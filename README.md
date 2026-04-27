@@ -2,40 +2,9 @@
 
 [![License Badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-<!-- The following line can be commented out to add a coverage badge here once a gist has been created for it. See the
-tutorial at https://nedbatchelder.com/blog/202209/making_a_coverage_badge.html, and also enable the code to generate
-the badge in the .github/job-test-main.yaml workflow-->
+This projects provides the code for a Flask-hosted page to provide a hub for Organic Toolkit projects, pointing to the site for each of them.
 
-<!-- ![Coverage Badge](https://img.shields.io/endpoint?url=[GIST_URL]/covbadge.json) -->
-
-Release date: 2025-08-04
-
-This is a template project for a PSDI project which deploys a Flask website, also publishing the project to PyPI so users can download it and run a local version. You can use this project on GitHub by clicking the green "Use this template" button on the top-right of the project page. This will let you choose a name for the new project, then create a repository for it.
-
-One you have a new project, you'll want to do the following tasks:
-
-1. Replace the "organic_toolkit_hub" placeholders throughout this project with the actual project name. This project provides a script to do this, at `scripts/rename_project.py`. You can run this through e.g.:
-
-```bash
-$ python scripts/rename_project.py new-project-name New Project Name
-```
-
-Here, "new-project-name" is the version of the project name to be used in code (hyphens and underscores will be swapped as appropriate for different contexts and language conventions), and "New Project Name" is the full, human-readable version of the project name. Once this script has run, check that the changes are desired, and you can safely delete it.
-
-If something went wrong, it's easiest to undo this through using git to revert the changes via e.g. `git reset --hard; git clean -f`. You might also have to manually remove created directories (since directories aren't directly tracked by git) via e.g. `rm -r folder_name`.
-
-2. Create a `release` branch and push it
-
-3. On GitHub, set up branch protection rules for `main` and `release`. My recommended settings are:
-
-- `main`: The default settings are fine (prevent creation and deletion). If you're working with multiple collaborators and/or want to be more cautious, you can set it to require a pull request before merging as well
-- `release`: The default settings, plus require a pull request before merging
-
-4. Enable any initially-disabled workflows (seach through the project for "if: false" to find them all) or remove entirely any you don't want
-
-5. If you enabled the workflow to publish to GitHub Pages, you'll need to enable Pages in the project settings. To do this, go to the project page on GitHub, then Settings (in the top bar), Pages (in the left column), and in the "Source" section, select "GitHub Actions". Note GitHub pages is not compatible with a backend server; only pages to be served to the user will be rendered as part of the site
-
-6. If you enabled workflows to deploy to STFC infrastructure, you'll need to set up project runners, since these don't get copied over in the templating. These should follow the name pattern `organic-toolkit-hub-runners` (you can alternatively name them something else and then change the name in the workflow files to match). To do this, follow the guide at https://stfc.atlassian.net/wiki/spaces/P/pages/990216270/Creating+GitHub+repository+coupled+Runner+Scale+Sets.
+For internal testing, the main branch of this project is published to https://psdi-uk.github.io/psdi-organic-toolkit
 
 ## Table of Contents
 
@@ -59,7 +28,7 @@ If something went wrong, it's easiest to undo this through using git to revert t
     - (Automated workflows for various tasks related to project maintenance)
 - `deploy`
   - (Files used as part of the deployment to STFC infrastructure)
-- `organic_toolkit_hub` (Primary source directory)
+- `psdi_organic_toolkit` (Primary source directory)
   - `static` (Static code and assets for the web app)
     - `img`
       - (Image assets for the web app)
@@ -89,7 +58,7 @@ If something went wrong, it's easiest to undo this through using git to revert t
 
 ### Python
 
-Any local installation of this project requires Python 3.12 or greater. The best way to do this is dependant on your system, and you are likely to find the best tailored instructions by searching the web for e.g. "install Python 3.12 <your-os-or-distribution>". Some standard options are:
+Any local installation of this project requires Python 3.11 or greater. The best way to do this is dependant on your system, and you are likely to find the best tailored instructions by searching the web for e.g. "install Python 3.11 <your-os-or-distribution>". Some standard options are:
 
 For Windows and MacOS: Download and run the installer for the latest version from the official site: https://www.python.org/downloads/
 
@@ -129,11 +98,11 @@ sudo apt install python3-pip
 If this doesn't work, or the version installed is too low, an alternative is to install Python via the Anaconda package manager. For this, see the guide here: https://www.askpython.com/python/examples/install-python-with-conda. If you already have an earlier version of Python installed with Anaconda, you can install and activate a newer version with a command such as:
 
 ```bash
-conda create --name myenv python=3.12 anaconda # Where 'myenv' is a possible conda environment name
+conda create --name myenv python=3.11 anaconda # Where 'myenv' is a possible conda environment name
 conda activate myenv
 ```
 
-You can also install a newer version of Python if you wish by substituting "3.12" in the above with e.g. "3.13".
+You can also install a newer version of Python if you wish by substituting "3.11" in the above with e.g. "3.13".
 
 ### Other Dependencies
 
@@ -158,7 +127,7 @@ In addition to the dependencies listed above, this project uses the assets made 
 
 ## Using the online app
 
-Enter https://organic_toolkit_hub.psdi.ac.uk/ in a browser. Guidance on usage is given on each page of the website.
+Enter https://organic-toolkit.psdi.ac.uk/ in a browser.
 
 ## Running the Python/Flask app locally
 
@@ -167,7 +136,7 @@ Enter https://organic_toolkit_hub.psdi.ac.uk/ in a browser. Guidance on usage is
 This project is available on PyPI, and so can be installed via pip, including the necessary dependencies for the GUI, with:
 
 ```bash
-pip install organic-toolkit-hub'[gui]'
+pip install psdi-organic-toolkit'[gui]'
 ```
 
 If you wish to install the project locally from source, this can be done most easily by cloning the project and then executing:
@@ -182,12 +151,12 @@ If your system does not allow installation in this manner, it may be necessary t
 
 ### Running the App
 
-Once installed, the command-line script `organic-toolkit-hub-gui` will be made available, which can be called to start the server. You can then access the website by going to <http://127.0.0.1:5000> in a browser (this will also be printed in the terminal, and you can CTRL+click it there to open it in your default browser). Guidance for using the app is given on each page of it. When you're finished with the app, key CTRL+C in the terminal where you called the script to shut down the server, or, if the process was backgrounded, kill the appropriate process.
+Once installed, the command-line script `psdi-organic-toolkit-gui` will be made available, which can be called to start the server. You can then access the website by going to <http://127.0.0.1:5000> in a browser (this will also be printed in the terminal, and you can CTRL+click it there to open it in your default browser). Guidance for using the app is given on each page of it. When you're finished with the app, key CTRL+C in the terminal where you called the script to shut down the server, or, if the process was backgrounded, kill the appropriate process.
 
 In case of problems when using Chrome, try opening Chrome from the command line:
 open -a "Google Chrome.app" --args --allow-file-access-from-files
 
-The local version has some customisable options for running it, which can can be seen by running `organic-toolkit-hub-gui --help`.
+The local version has some customisable options for running it, which can can be seen by running `psdi-organic-toolkit-gui --help`.
 
 ## Testing
 
@@ -218,7 +187,6 @@ This section presents solutions for commonly-encountered issues.
 
 ## Contributors
 
-- (Add your name here)
 - Bryan Gillis (7204836+brgillis@users.noreply.github.com)
 
 ## Funding

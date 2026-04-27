@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v6
@@ -45,7 +45,7 @@ jobs:
           coverage report
 
       - name: "Upload coverage data"
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: covdata
           path: coverage.json
@@ -53,9 +53,9 @@ jobs:
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
-          flake8 tests organic_toolkit_hub --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 tests psdi_organic_toolkit --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings
-          flake8 tests organic_toolkit_hub --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
+          flake8 tests psdi_organic_toolkit --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
 
       - name: Test building the package
         run: |
@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: "actions/checkout@v5"
+        uses: "actions/checkout@v6"
 
       - name: Set up Python
         uses: "actions/setup-python@v6"
@@ -77,7 +77,7 @@ jobs:
           python-version: "3.12"
 
       - name: Download coverage data
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: covdata
 
@@ -93,7 +93,7 @@ jobs:
         # to the repository's secrets. See the tutorial at
         # https://nedbatchelder.com/blog/202209/making_a_coverage_badge.html, and also uncomment the badge in the README
         if: false
-        uses: schneegans/dynamic-badges-action@v1.7.0
+        uses: schneegans/dynamic-badges-action@v1.8.0
         with:
           auth: ${{ secrets.COVERAGE_GIST_TOKEN }}
           gistID: dbd938192dc4de9b7779978e515c0e79

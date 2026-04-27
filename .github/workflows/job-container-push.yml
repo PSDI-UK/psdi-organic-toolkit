@@ -17,9 +17,9 @@ on:
 
 jobs:
   container-push:
-    runs-on: organic-toolkit-hub-runners
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Setup docker auth
@@ -39,15 +39,20 @@ jobs:
           GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker build API
         env:
-          IMAGE_NAME: "ghcr.io/psdi-uk/organic_toolkit_hub/organic_toolkit_hub:${{ inputs.container_tag }}"
+          IMAGE_NAME: "ghcr.io/psdi-uk/psdi_organic_toolkit/psdi_organic_toolkit:${{ inputs.container_tag }}"
         run: |
           SHA=`git log -n 1 | head -n 1 | awk '{print($2)}'`
           TAG=`git tag --sort -version:refname | head -n 1`
           TAG_SHA=`git show $TAG | head -n 1 | awk '{print($2)}'`
-          echo "Building with TAG=$TAG, TAG_SHA=$TAG_SHA, SHA=$SHA"
+          DATE=`git log -n 1 --pretty=reference | head -n 1 | gawk '{print($NF)}' \
+                | gawk '{print substr($0, 1, length($0)-1)}'`
+          REL_URL_PATH=/variability-plot
+          echo "Building with TAG=$TAG, TAG_SHA=$TAG_SHA, SHA=$SHA, DATE=$DATE, REL_URL_PATH=$REL_URL_PATH"
           docker build \
             --build-arg SHA=$SHA \
             --build-arg TAG=$TAG \
             --build-arg TAG_SHA=$TAG_SHA \
+            --build-arg DATE=$DATE \
+            --build-arg REL_URL_PATH=$REL_URL_PATH \
             -t $IMAGE_NAME .
           docker push $IMAGE_NAME

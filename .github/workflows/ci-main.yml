@@ -23,10 +23,8 @@ jobs:
   deploy-pages:
     uses: ./.github/workflows/job-publish-pages.yml
     needs: [test-all]
-    # When ready to enable this step, remove the following line and uncomment the proper condition below it
-    if: false
     # Proceed if test-all was successful or skipped
-    # if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
+    if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
 
   container-push:
     uses: ./.github/workflows/job-container-push.yml
@@ -39,16 +37,19 @@ jobs:
       container_tag: ${{ github.sha }}
   # Deploy to Kubernetes Job
   # Requires an environment, which must reflect the target environment as defined in the
-  # GitHub repository: https://github.com/PSDI-UK/organic-toolkit-hub/settings/environments
+  # GitHub repository: https://github.com/PSDI-UK/psdi-organic-toolkit/settings/environments
   # The downstream deploy job leverages on Environment specific secrets, which also must be defined
   # For the tag, we need something unique for each push, so we use the SHA of the latest commit
-  deploy-stfc-dev-k8s:
-    needs: [container-push]
-    # Proceed if test-all was successful or skipped
-    if: always() && (needs.container-push.result == 'success')
-    uses: ./.github/workflows/job-deploy-k8s.yml # use the callable deploy job
-    secrets: inherit # pass all secrets for the environment
-    with:
-      # container_tag
-      container_tag: ${{ github.sha }}
-      environment: development
+  # TODO: Uncomment the below section once the deployment repo is set up
+  # deploy-stfc-dev-k8s:
+  #   needs: [container-push]
+  #   # Proceed if test-all was successful or skipped
+  #   if: always() && (needs.container-push.result == 'success')
+  #   uses: PSDI-UK/psdi-organic-toolkit-deployment/.github/workflows/job-external-deployment.yaml
+  #   with:
+  #     # container_tag
+  #     container_tag: ${{ github.sha }}
+  #     environment: development
+  #   secrets:
+  #     deployment_app_id: ${{ secrets.DEPLOYMENT_APP_ID }}
+  #     deployment_app_private_key: ${{ secrets.DEPLOYMENT_APP_PRIVATE_KEY }}

@@ -1,0 +1,917 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap');
+
+:root {
+  /* PSDI Common Style Definition
+     ----------------------------                                            
+                                                                             
+     This file defines the common PSDI style scheme. The variable definitions here can be modified to alter this scheme,
+     and they will be included and used appropriately by the various builders.
+     
+     Stylesheets for specific projects can use the variables defined her. For proper results, only the "--ifm-*"
+     variables should be used in style declarations - the "--psdi-*" variables are used to define possible values for
+     the former to take depending on the mode (light or dark mode). Using these directly will result in locking a style
+     into one of these modes.
+
+     The "--ifm-" prefix refers to Infima, so that these variables are compatible with the Infima CSS framework used by
+     Docusaurus (https://docusaurus.community/knowledge/design/css/variables/). Not all of the "--ifm-*" variables
+     defined here are actually used by the Infima framework; the prefix is used for all variables here for a consistent
+     naming scheme to be compatible with Infima where supported and also distinguish them from the "--psdi-*" variables
+     used to define the underlying palette for light and dark modes.
+  */
+
+
+  /* Font */
+  --ifm-font-size-base     : 1rem;
+  --ifm-line-height-base   : 1.5;
+  --ifm-font-family-base   : Lato, Helvetica, Verdana, Arial, Lucida, sans-serif;
+  --ifm-heading-font-family: Oswald, Helvetica, Verdana, Arial, Lucida, sans-serif;
+  --ifm-font-weight-base   : normal;
+  --ifm-letter-spacing-base: normal;
+
+  /* Link styling */
+  --ifm-link-color             : inherit;
+  --ifm-link-hover-color       : inherit;
+  --ifm-navbar-link-hover-color: inherit;
+
+  /* Text colors for various parts of the page, with faded versions of each: f1: 25% faded, f2: 50% faded,
+     f3: 75% faded */
+
+  --psdi-dark-text-color-body   : #000000;
+  --psdi-dark-text-color-body-f1: #000000c0;
+  --psdi-dark-text-color-body-f2: #00000080;
+  --psdi-dark-text-color-body-f3: #00000040;
+
+  --psdi-dark-text-color-heading   : #041E42;
+  --psdi-dark-text-color-heading-f1: #041E42c0;
+  --psdi-dark-text-color-heading-f2: #041E4280;
+  --psdi-dark-text-color-heading-f3: #041E4240;
+
+  --psdi-light-text-color-body   : #ffffff;
+  --psdi-light-text-color-body-f1: #ffffffc0;
+  --psdi-light-text-color-body-f2: #ffffff80;
+  --psdi-light-text-color-body-f3: #ffffff40;
+
+  --psdi-light-text-color-heading   : #ffffff;
+  --psdi-light-text-color-heading-f1: #ffffff;
+  --psdi-light-text-color-heading-f2: #ffffff;
+  --psdi-light-text-color-heading-f3: #ffffff;
+
+  --psdi-text-color-default-body      : var(--psdi-dark-text-color-body);
+  --psdi-text-color-default-heading   : var(--psdi-dark-text-color-heading);
+  --psdi-dm-text-color-default-body   : var(--psdi-light-text-color-body);
+  --psdi-dm-text-color-default-heading: var(--psdi-light-text-color-heading);
+
+  /* Default background color for light and dark modes */
+  --psdi-bg-color-default   : #ffffff;
+  --psdi-dm-bg-color-default: #0a0a19;
+
+  /* Background color for input elements for light and dark mode */
+  --psdi-bg-color-input             : #ffffff;
+  --psdi-bg-color-input-secondary   : #e0e0e0;
+  --psdi-bg-color-input-secondary-f1: #e0e0e0c0;
+  --psdi-bg-color-input-secondary-f2: #e0e0e080;
+  --psdi-bg-color-input-secondary-f3: #e0e0e040;
+  --psdi-bg-color-input-contrast    : #767676;
+  --psdi-bg-color-input-contrast-f1 : #767676c0;
+  --psdi-bg-color-input-contrast-f2 : #76767680;
+  --psdi-bg-color-input-contrast-f3 : #76767640;
+
+  --psdi-dm-bg-color-input                  : #050505;
+  --psdi-dm-bg-color-input-secondary-lighter: #4d4d4d;
+  --psdi-dm-bg-color-input-secondary-light  : #404040;
+  --psdi-dm-bg-color-input-secondary        : #323232;
+  --psdi-dm-bg-color-input-secondary-f1     : #323232c0;
+  --psdi-dm-bg-color-input-secondary-f2     : #32323280;
+  --psdi-dm-bg-color-input-secondary-f3     : #32323240;
+  --psdi-dm-bg-color-input-contrast         : #a0a0a0;
+  --psdi-dm-bg-color-input-contrast-f1      : #a0a0a0c0;
+  --psdi-dm-bg-color-input-contrast-f2      : #a0a0a080;
+  --psdi-dm-bg-color-input-contrast-f3      : #a0a0a040;
+
+  /* Primary color - used for Hero panel and footer */
+  --psdi-color-primary           : #041e42;
+  --psdi-color-primary-dark      : #041b3b;
+  --psdi-color-primary-darker    : #031938;
+  --psdi-color-primary-darkest   : #03152e;
+  --psdi-color-primary-light     : #042452;
+  --psdi-color-primary-lighter   : #04316b;
+  --psdi-color-primary-lightest  : #00437d;
+  --psdi-color-primary-lightestp1: #005198;
+  --psdi-color-primary-lightestp2: #005cad;
+
+  --psdi-dm-color-primary           : var(--psdi-color-primary);
+  --psdi-dm-color-primary-dark      : var(--psdi-color-primary-dark);
+  --psdi-dm-color-primary-darker    : var(--psdi-color-primary-darker);
+  --psdi-dm-color-primary-darkest   : var(--psdi-color-primary-darkest);
+  --psdi-dm-color-primary-light     : var(--psdi-color-primary-light);
+  --psdi-dm-color-primary-lighter   : var(--psdi-color-primary-lighter);
+  --psdi-dm-color-primary-lightest  : var(--psdi-color-primary-lightest);
+  --psdi-dm-color-primary-lightestp1: var(--psdi-color-primary-lightestp1);
+  --psdi-dm-color-primary-lightestp2: var(--psdi-color-primary-lightestp2);
+
+  /* Secondary color - used for background of secondary sections */
+  --psdi-bg-color-secondary         : #e5e1e6;
+  --psdi-bg-color-secondary-dark    : #cfc8d1;
+  --psdi-bg-color-secondary-darker  : #c5bcc7;
+  --psdi-bg-color-secondary-darkest : #a497a8;
+  --psdi-bg-color-secondary-light   : #f0edf0;
+  --psdi-bg-color-secondary-lighter : #fbfafb;
+  --psdi-bg-color-secondary-lightest: #ffffff;
+
+  --psdi-dm-bg-color-secondary           : #181823;
+  --psdi-dm-bg-color-secondary-dark      : #12121e;
+  --psdi-dm-bg-color-secondary-darker    : #0c0c19;
+  --psdi-dm-bg-color-secondary-darkest   : #060613;
+  --psdi-dm-bg-color-secondary-light     : #282833;
+  --psdi-dm-bg-color-secondary-lighter   : #383843;
+  --psdi-dm-bg-color-secondary-lightest  : #484843;
+  --psdi-dm-bg-color-secondary-lightestp1: #585853;
+
+  /* Success color */
+  --ifm-color-success         : #5aa2ae;
+  --ifm-color-success-dark    : #4e949f;
+  --ifm-color-success-darker  : #4a8c97;
+  --ifm-color-success-darkest : #3d737c;
+  --ifm-color-success-light   : #6cacb7;
+  --ifm-color-success-lighter : #75b1bb;
+  --ifm-color-success-lightest: #8fc0c8;
+
+  /* Info color */
+  --ifm-color-info         : #3d7cc9;
+  --ifm-color-info-dark    : #336fb8;
+  --ifm-color-info-darker  : #3069ae;
+  --ifm-color-info-darkest : #28578f;
+  --ifm-color-info-light   : #518acf;
+  --ifm-color-info-lighter : #5c91d2;
+  --ifm-color-info-lightest: #7aa6da;
+
+  /* Warning color */
+  --ifm-color-warning         : #ff9e18;
+  --ifm-color-warning-dark    : #fb9200;
+  --ifm-color-warning-darker  : #ed8a00;
+  --ifm-color-warning-darkest : #c37100;
+  --ifm-color-warning-light   : #ffaa34;
+  --ifm-color-warning-lighter : #ffb042;
+  --ifm-color-warning-lightest: #ffc16c;
+
+  /* Danger color */
+  --ifm-color-danger         : #993366;
+  --ifm-color-danger-dark    : #8a2e5c;
+  --ifm-color-danger-darker  : #822b57;
+  --ifm-color-danger-darkest : #6b2447;
+  --ifm-color-danger-light   : #a83870;
+  --ifm-color-danger-lighter : #b03b75;
+  --ifm-color-danger-lightest: #c24785;
+
+  /* Set specific colors to used based on light/dark-mode */
+  /* Define light mode here first, as default */
+  --ifm-background-color           : var(--psdi-bg-color-default);
+  --ifm-input-bg-color             : var(--psdi-bg-color-input);
+  --ifm-input-disabled-bg-color    : var(--psdi-bg-color-input-secondary);
+  --ifm-input-border-color         : var(--psdi-bg-color-input-contrast);
+  --ifm-input-disabled-border-color: var(--psdi-bg-color-input-contrast-f3);
+
+  --ifm-color-primary           : var(--psdi-color-primary);
+  --ifm-color-primary-dark      : var(--psdi-color-primary-dark);
+  --ifm-color-primary-darker    : var(--psdi-color-primary-darker);
+  --ifm-color-primary-darkest   : var(--psdi-color-primary-darkest);
+  --ifm-color-primary-light     : var(--psdi-color-primary-light);
+  --ifm-color-primary-lighter   : var(--psdi-color-primary-lighter);
+  --ifm-color-primary-lightest  : var(--psdi-color-primary-lightest);
+  --ifm-color-primary-lightestp1: var(--psdi-color-primary-lightestp1);
+  --ifm-color-primary-lightestp2: var(--psdi-color-primary-lightestp2);
+
+  --ifm-bg-color-button       : var(--ifm-color-primary);
+  --ifm-bg-color-button-hover : var(--ifm-color-primary-lighter);
+  --ifm-bg-color-button-active: var(--ifm-color-primary-lightest);
+
+  --ifm-color-button-disabled       : var(--psdi-dark-text-color-body-f2);
+  --ifm-bg-color-button-disabled    : var(--psdi-bg-color-input-contrast-f3);
+  --ifm-border-color-button-disabled: var(--psdi-bg-color-input-contrast-f3);
+
+  --ifm-color-button-cancel          : var(--psdi-text-color-default-body);
+  --ifm-bg-color-button-cancel       : var(--psdi-bg-color-input-secondary-f1);
+  --ifm-bg-color-button-cancel-hover : var(--psdi-bg-color-input-secondary);
+  --ifm-bg-color-button-cancel-active: var(--psdi-bg-color-input-secondary-f3);
+  --ifm-border-color-button-cancel   : var(--psdi-bg-color-input-secondary-f2);
+
+  --ifm-color-secondary         : var(--psdi-bg-color-secondary);
+  --ifm-color-secondary-light   : var(--psdi-bg-color-secondary-light);
+  --ifm-color-secondary-lighter : var(--psdi-bg-color-secondary-lighter);
+  --ifm-color-secondary-lightest: var(--psdi-bg-color-secondary-lightest);
+  --ifm-color-secondary-dark    : var(--psdi-bg-color-secondary-dark);
+  --ifm-color-secondary-darker  : var(--psdi-bg-color-secondary-darker);
+  --ifm-color-secondary-darkest : var(--psdi-bg-color-secondary-darkest);
+
+  --ifm-background-color-secondary         : var(--psdi-bg-color-secondary);
+  --ifm-background-color-secondary-light   : var(--psdi-bg-color-secondary-light);
+  --ifm-background-color-secondary-lighter : var(--psdi-bg-color-secondary-lighter);
+  --ifm-background-color-secondary-lightest: var(--psdi-bg-color-secondary-lightest);
+  --ifm-background-color-secondary-dark    : var(--psdi-bg-color-secondary-dark);
+  --ifm-background-color-secondary-darker  : var(--psdi-bg-color-secondary-darker);
+  --ifm-background-color-secondary-darkest : var(--psdi-bg-color-secondary-darkest);
+
+  --ifm-font-color-base   : var(--psdi-dark-text-color-body);
+  --ifm-font-color-base-f1: var(--psdi-dark-text-color-body-f1);
+  --ifm-font-color-base-f2: var(--psdi-dark-text-color-body-f2);
+  --ifm-font-color-base-f3: var(--psdi-dark-text-color-body-f3);
+
+  --ifm-hero-text-color   : var(--psdi-light-text-color-body);
+  --ifm-hero-text-color-f1: var(--psdi-light-text-color-body-f1);
+  --ifm-hero-text-color-f2: var(--psdi-light-text-color-body-f2);
+  --ifm-hero-text-color-f3: var(--psdi-light-text-color-body-f3);
+
+  --ifm-font-color-primary   : var(--psdi-light-text-color-body);
+  --ifm-font-color-primary-f1: var(--psdi-light-text-color-body-f1);
+  --ifm-font-color-primary-f2: var(--psdi-light-text-color-body-f2);
+  --ifm-font-color-primary-f3: var(--psdi-light-text-color-body-f3);
+
+  --ifm-heading-color   : var(--psdi-dark-text-color-heading);
+  --ifm-heading-color-f1: var(--psdi-dark-text-color-heading-f1);
+  --ifm-heading-color-f2: var(--psdi-dark-text-color-heading-f2);
+  --ifm-heading-color-f3: var(--psdi-dark-text-color-heading-f3);
+
+  --ifm-hero-heading-color   : var(--psdi-light-text-color-heading);
+  --ifm-hero-heading-color-f1: var(--psdi-light-text-color-heading-f1);
+  --ifm-hero-heading-color-f2: var(--psdi-light-text-color-heading-f2);
+  --ifm-hero-heading-color-f3: var(--psdi-light-text-color-heading-f3);
+
+  --ifm-font-color-secondary   : var(--psdi-dark-text-color-body);
+  --ifm-font-color-secondary-f1: var(--psdi-dark-text-color-body-f1);
+  --ifm-font-color-secondary-f2: var(--psdi-dark-text-color-body-f2);
+  --ifm-font-color-secondary-f3: var(--psdi-dark-text-color-body-f3);
+
+  --ifm-heading-color-secondary   : var(--psdi-dark-text-color-heading);
+  --ifm-heading-color-secondary-f1: var(--psdi-dark-text-color-heading-f1);
+  --ifm-heading-color-secondary-f2: var(--psdi-dark-text-color-heading-f2);
+  --ifm-heading-color-secondary-f3: var(--psdi-dark-text-color-heading-f3);
+
+  --ifm-menu-color-active         : var(--psdi-color-primary);
+  --ifm-breadcrumb-color-active   : var(--psdi-color-primary);
+  --ifm-pagination-nav-color-hover: var(--psdi-color-primary);
+
+  --lm-display: inherit;
+  --dm-display: none;
+
+  /* And finally we define some variables which are based off the above variables set based on the theme */
+
+  /* Footer */
+  --ifm-footer-background-color: var(--ifm-color-primary);
+  --ifm-footer-title-color     : var(--ifm-hero-text-color);
+  --ifm-footer-color           : var(--ifm-hero-text-color);
+  --ifm-footer-link-color      : var(--ifm-hero-text-color);
+  --ifm-footer-link-hover-color: var(--ifm-hero-text-color);
+
+}
+
+[data-theme='dark'],
+[data-theme='dark'] .hero--primary,
+[data-theme='dark'] .hero {
+
+  /* This section sets the mode-dependent variables to the values that they should take in dark mode */
+  --ifm-background-color           : var(--psdi-dm-bg-color-default);
+  --ifm-input-bg-color             : var(--psdi-dm-bg-color-input);
+  --ifm-input-disabled-bg-color    : var(--psdi-dm-bg-color-input-secondary);
+  --ifm-input-border-color         : var(--psdi-dm-bg-color-input-contrast);
+  --ifm-input-disabled-border-color: var(--psdi-dm-bg-color-input-contrast-f3);
+
+  --ifm-color-primary           : var(--psdi-dm-color-primary);
+  --ifm-color-primary-dark      : var(--psdi-dm-color-primary-dark);
+  --ifm-color-primary-darker    : var(--psdi-dm-color-primary-darker);
+  --ifm-color-primary-darkest   : var(--psdi-dm-color-primary-darkest);
+  --ifm-color-primary-light     : var(--psdi-dm-color-primary-light);
+  --ifm-color-primary-lighter   : var(--psdi-dm-color-primary-lighter);
+  --ifm-color-primary-lightest  : var(--psdi-dm-color-primary-lightest);
+  --ifm-color-primary-lightestp1: var(--psdi-dm-color-primary-lightestp1);
+  --ifm-color-primary-lightestp2: var(--psdi-dm-color-primary-lightestp2);
+
+  --ifm-bg-color-button       : var(--ifm-color-primary-lighter);
+  --ifm-bg-color-button-hover : var(--ifm-color-primary-lightestp1);
+  --ifm-bg-color-button-active: var(--ifm-color-primary-lightestp2);
+
+  --ifm-color-button-disabled       : var(--psdi-light-text-color-body-f2);
+  --ifm-bg-color-button-disabled    : var(--psdi-dm-bg-color-input-contrast-f3);
+  --ifm-border-color-button-disabled: var(--psdi-dm-bg-color-input-contrast-f3);
+
+  --ifm-color-button-cancel          : var(--psdi-dm-text-color-default-body);
+  --ifm-bg-color-button-cancel       : var(--psdi-dm-bg-color-input-secondary);
+  --ifm-bg-color-button-cancel-hover : var(--psdi-dm-bg-color-input-secondary-light);
+  --ifm-bg-color-button-cancel-active: var(--psdi-dm-bg-color-input-secondary-lighter);
+  --ifm-border-color-button-cancel   : var(--psdi-dm-bg-color-input-secondary-f1);
+
+  --ifm-color-secondary           : var(--psdi-dm-bg-color-secondary);
+  --ifm-color-secondary-light     : var(--psdi-dm-bg-color-secondary-light);
+  --ifm-color-secondary-lighter   : var(--psdi-dm-bg-color-secondary-lighter);
+  --ifm-color-secondary-lightest  : var(--psdi-dm-bg-color-secondary-lightest);
+  --ifm-color-secondary-lightestp1: var(--psdi-dm-bg-color-secondary-lightestp1);
+  --ifm-color-secondary-dark      : var(--psdi-dm-bg-color-secondary-dark);
+  --ifm-color-secondary-darker    : var(--psdi-dm-bg-color-secondary-darker);
+  --ifm-color-secondary-darkest   : var(--psdi-dm-bg-color-secondary-darkest);
+
+  --ifm-background-color-secondary           : var(--psdi-dm-bg-color-secondary);
+  --ifm-background-color-secondary-light     : var(--psdi-dm-bg-color-secondary-light);
+  --ifm-background-color-secondary-lighter   : var(--psdi-dm-bg-color-secondary-lighter);
+  --ifm-background-color-secondary-lightest  : var(--psdi-dm-bg-color-secondary-lightest);
+  --ifm-background-color-secondary-lightestp1: var(--psdi-dm-bg-color-secondary-lightestp1);
+  --ifm-background-color-secondary-dark      : var(--psdi-dm-bg-color-secondary-dark);
+  --ifm-background-color-secondary-darker    : var(--psdi-dm-bg-color-secondary-darker);
+  --ifm-background-color-secondary-darkest   : var(--psdi-dm-bg-color-secondary-darkest);
+
+  --ifm-font-color-base   : var(--psdi-light-text-color-body);
+  --ifm-font-color-base-f1: var(--psdi-light-text-color-body-f1);
+  --ifm-font-color-base-f2: var(--psdi-light-text-color-body-f2);
+  --ifm-font-color-base-f3: var(--psdi-light-text-color-body-f3);
+
+  --ifm-hero-text-color   : var(--psdi-light-text-color-body);
+  --ifm-hero-text-color-f1: var(--psdi-light-text-color-body-f1);
+  --ifm-hero-text-color-f2: var(--psdi-light-text-color-body-f2);
+  --ifm-hero-text-color-f3: var(--psdi-light-text-color-body-f3);
+
+  --ifm-font-color-primary   : var(--psdi-dark-text-color-body);
+  --ifm-font-color-primary-f1: var(--psdi-dark-text-color-body-f1);
+  --ifm-font-color-primary-f2: var(--psdi-dark-text-color-body-f2);
+  --ifm-font-color-primary-f3: var(--psdi-dark-text-color-body-f3);
+
+  --ifm-heading-color   : var(--psdi-light-text-color-heading);
+  --ifm-heading-color-f1: var(--psdi-light-text-color-heading-f1);
+  --ifm-heading-color-f2: var(--psdi-light-text-color-heading-f2);
+  --ifm-heading-color-f3: var(--psdi-light-text-color-heading-f3);
+
+  --ifm-hero-heading-color   : var(--psdi-light-text-color-heading);
+  --ifm-hero-heading-color-f1: var(--psdi-light-text-color-heading-f1);
+  --ifm-hero-heading-color-f2: var(--psdi-light-text-color-heading-f2);
+  --ifm-hero-heading-color-f3: var(--psdi-light-text-color-heading-f3);
+
+  --ifm-font-color-secondary   : var(--psdi-light-text-color-body);
+  --ifm-font-color-secondary-f1: var(--psdi-light-text-color-body-f1);
+  --ifm-font-color-secondary-f2: var(--psdi-light-text-color-body-f2);
+  --ifm-font-color-secondary-f3: var(--psdi-light-text-color-body-f3);
+
+  --ifm-heading-color-secondary   : var(--psdi-light-text-color-heading);
+  --ifm-heading-color-secondary-f1: var(--psdi-light-text-color-heading-f1);
+  --ifm-heading-color-secondary-f2: var(--psdi-light-text-color-heading-f2);
+  --ifm-heading-color-secondary-f3: var(--psdi-light-text-color-heading-f3);
+
+  --ifm-menu-color-active         : var(--ifm-color-info);
+  --ifm-breadcrumb-color-active   : var(--ifm-color-info);
+  --ifm-pagination-nav-color-hover: var(--ifm-color-info);
+
+  --lm-display: none;
+  --dm-display: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing  : antialiased;
+  text-rendering          : optimizelegibility;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust        : 100%;
+}
+
+body {
+  min-height      : 100vh;
+  font-family     : var(--ifm-font-family-base);
+  font-size       : var(--ifm-font-size-base);
+  font-weight     : var(--ifm-font-weight-base);
+  background-color: var(--ifm-background-color);
+  color           : var(--ifm-font-color-base);
+  letter-spacing  : var(--ifm-letter-spacing-base);
+  line-height     : var(--ifm-line-height-base);
+  display         : flex;
+  flex-direction  : column;
+  justify-content : space-between;
+  padding         : 0;
+  margin          : 0;
+  word-wrap       : break-word;
+}
+
+#cover {
+  position  : fixed;
+  height    : 100%;
+  width     : 100%;
+  top       : 0;
+  left      : 0;
+  background: var(--ifm-background-color);
+  z-index   : 99999;
+}
+
+input[type="radio"]:hover {
+  cursor: pointer;
+}
+
+:is(select, option, input) {
+  font-family     : var(--ifm-font-family-base);
+  font-size       : var(--ifm-font-size-base);
+  font-weight     : var(--ifm-font-weight-base);
+  background-color: var(--ifm-input-bg-color);
+  border          : 2px inset var(--ifm-input-border-color);
+  color           : var(--ifm-font-color-base);
+  letter-spacing  : var(--ifm-letter-spacing-base);
+  line-height     : var(--ifm-line-height-base);
+}
+
+:is(select, option, input):disabled {
+  background-color: var(--ifm-input-disabled-bg-color);
+  border-color    : var(--ifm-input-disabled-border-color);
+}
+
+input::placeholder {
+  color     : var(--ifm-font-color-base-f2);
+  font-style: italic;
+}
+
+:is(button, input.button, input[type="button"]):not(.clean-btn),
+input[type="file"]::file-selector-button {
+  font-family     : var(--ifm-font-family-base);
+  font-size       : var(--ifm-font-size-base);
+  color           : var(--ifm-hero-text-color);
+  background-color: var(--ifm-bg-color-button);
+  letter-spacing  : var(--ifm-letter-spacing-base);
+  line-height     : var(--ifm-line-height-base);
+  border-radius   : 0.25rem;
+  margin          : 0.25rem;
+}
+
+:is(button, input.button, input[type="button"]):not(.clean-btn):hover,
+input[type="file"]::file-selector-button:hover,
+:is(button, input.button, input[type="button"]):not(.clean-btn):focus,
+input[type="file"]::file-selector-button:focus {
+  background-color: var(--ifm-bg-color-button-hover);
+  cursor          : pointer;
+}
+
+:is(button, input.button, input[type="button"]):not(.clean-btn):active,
+input[type="file"]::file-selector-button:active {
+  background-color: var(--ifm-bg-color-button-active);
+}
+
+:is(button, input.button, input[type="button"]):not(.clean-btn):disabled,
+input[type="file"]:disabled::file-selector-button {
+  background-color: var(--ifm-bg-color-button-disabled);
+  border-color    : var(--ifm-border-color-button-disabled);
+  color           : var(--ifm-color-button-disabled);
+}
+
+:is(button, input.button, input[type="button"]):not(.clean-btn):disabled:hover,
+input[type="file"]:disabled::file-selector-button:hover {
+  background-color: var(--ifm-bg-color-button-disabled);
+  cursor          : default;
+}
+
+:is(button, input.button, input[type="button"]).cancel:not(:disabled) {
+  color           : var(--ifm-color-button-cancel);
+  background-color: var(--ifm-bg-color-button-cancel);
+  border-color    : var(--ifm-border-color-button-cancel);
+}
+
+:is(button, input.button, input[type="button"]).cancel:not(:disabled):hover,
+:is(button, input.button, input[type="button"]).cancel:not(:disabled):focus {
+  background-color: var(--ifm-bg-color-button-cancel-hover);
+}
+
+:is(button, input.button, input[type="button"]).cancel:not(:disabled):active {
+  background-color: var(--ifm-bg-color-button-cancel-active);
+}
+
+option:checked {
+  background-color: var(--ifm-color-primary);
+  color           : var(--ifm-hero-text-color);
+}
+
+*:has(> .max-width-box) {
+  display        : flex;
+  justify-content: center;
+}
+
+body>* {
+  flex-grow: 1;
+  padding  : 0.5rem 0;
+}
+
+#__docusaurus {
+  padding: 0;
+}
+
+.max-width-box {
+  max-width: min(1320px, 95vw);
+}
+
+.lm-only {
+  display: var(--lm-display);
+}
+
+.dm-only {
+  display: var(--dm-display);
+}
+
+.announcementBar_mb4j,
+.header,
+.hero,
+.footer {
+  flex: none;
+}
+
+.announcementBar_mb4j {
+  background-color: #ff89a2;
+  color           : black;
+  display         : flex;
+  flex-direction  : column;
+  align-items     : center;
+  padding         : 0;
+  height          : auto !important;
+}
+
+.announcementBarContent_xLdY {
+  font-size : 1rem;
+  padding   : 5px 0;
+  text-align: center;
+}
+
+.header .max-width-box {
+  display        : flex;
+  flex           : auto;
+  justify-content: space-around;
+  align-items    : center;
+}
+
+.header-left {
+  display       : flex;
+  flex          : 1 1 50%;
+  flex-direction: row;
+  align-items   : center;
+}
+
+.navbar__item {
+  padding    : 0.5rem 0.75rem;
+  font-weight: var(--ifm-font-weight-base);
+}
+
+#psdi-header .navbar__items--right {
+  display        : flex;
+  flex           : 1 1 50%;
+  flex-direction : row;
+  flex-wrap      : wrap;
+  justify-content: right;
+  align-items    : center;
+}
+
+/* Applies only to buttons with this class not in the PSDI header, to not break docusaurus sites */
+button.clean-btn {
+  margin: 0;
+}
+
+#psdi-header button.clean-btn {
+  background-color: inherit;
+  border          : none;
+  color           : inherit;
+  cursor          : pointer;
+  font-family     : inherit;
+  padding         : 0;
+  align-items     : center;
+  border-radius   : 50%;
+  display         : flex;
+  justify-content : center;
+  height          : 2rem;
+  width           : 2rem;
+}
+
+#psdi-header button.clean-btn:hover {
+  background-color: var(--ifm-background-color-secondary);
+}
+
+#psdi-header button.clean-btn:active {
+  background-color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color      : var(--ifm-heading-color);
+  font-family: var(--ifm-heading-font-family);
+  font-weight: bold;
+  margin     : 0 0 1rem 0;
+}
+
+.marginless_header {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.75rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1.25rem;
+}
+
+p {
+  margin        : 0 0 1.25rem 0;
+  padding-bottom: 0;
+}
+
+.text--center {
+  text-align: center;
+}
+
+#psdi-header ul,
+#psdi-footer ul {
+  list-style: none;
+  padding   : 0;
+}
+
+.hero,
+.footer {
+  color           : var(--ifm-hero-text-color);
+  background-color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] :is(.header, .hero, .footer, .content, .secondary):has(.header, +.hero, +.footer, +.content,
+  +.secondary) {
+  border-width       : 1px;
+  border-color       : var(--ifm-hero-text-color-f1);
+  border-bottom-style: solid;
+}
+
+.hero .max-width-box {
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+  margin        : 2rem;
+}
+
+.hero__title {
+  font-size: 3rem;
+}
+
+.hero__subtitle {
+  font-size: 1.5rem;
+}
+
+.secondary {
+  background-color: var(--ifm-background-color-secondary);
+}
+
+:is(.hero, .footer) :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--ifm-hero-heading-color);
+}
+
+.secondary {
+  color: var(--ifm-font-color-secondary);
+}
+
+:is(.secondary) :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--ifm-heading-color-secondary);
+}
+
+/* Link styling - to match main page, we make links bold and make underline
+   disappear when hovered over, and don't show the extra icon. */
+a {
+  color          : inherit;
+  font-weight    : bold;
+  text-decoration: underline;
+}
+
+.content_knG7 a:hover,
+a:hover {
+  text-decoration: none;
+  cursor         : pointer;
+}
+
+a.no-pointer {
+  cursor: default;
+}
+
+/* For links which contain longer text content, don't underline any text in paragraphs,
+   but do underline (and remove on hover) in the headings */
+a:has(>h1, >h2, >h3, >h4, >h5, >h6) {
+  text-decoration: none;
+}
+
+a :is(h1, h2, h3, h4, h5, h6) {
+  text-decoration: underline;
+}
+
+a:hover :is(h1, h2, h3, h4, h5, h6) {
+  text-decoration: none;
+}
+
+/* Don't display the icons Docusaurus adds to links */
+a svg {
+  display: none;
+}
+
+.navbar {
+  padding: 1rem 0;
+}
+
+.navbar__brand {
+  display       : flex;
+  flex-direction: row;
+  align-items   : center;
+  padding-right : 0 0.75rem;
+}
+
+@media (max-width: 700px) {
+  .navbar__brand {
+    flex-wrap: wrap;
+  }
+}
+
+.navbar__title h5 {
+  display: flex;
+  color  : var(--ifm-heading-color);
+  margin : 0 0 0.5rem 1.5rem;
+}
+
+.navbar__logo img {
+  width    : 100%;
+  min-width: 7.5rem;
+  max-width: 15rem;
+}
+
+#__docusaurus .navbar__logo img {
+  height   : 2rem;
+  min-width: auto;
+  max-width: auto;
+}
+
+.footer {
+  padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.footer .max-width-box {
+  display       : flex;
+  flex-direction: column;
+  align-items   : stretch;
+  text-align    : left;
+}
+
+.footer .container-fluid {
+  padding: 0;
+}
+
+.footer .footer__bottom {
+  margin: 0;
+}
+
+.footer__links {
+  display        : flex;
+  flex-direction : row;
+  justify-content: center;
+  align-items    : flex-start;
+  margin         : 0;
+}
+
+#footer__links__left {
+  min-width            : 20rem;
+  flex                 : 1 1 60%;
+  display              : grid;
+  grid-template-columns: 40% 60%;
+  grid-template-rows   : 3rem 1rem auto 1rem;
+  margin-right         : 0;
+  padding-right        : 0;
+}
+
+#footer__links__right {
+  min-width            : 20rem;
+  flex                 : 1 1 40%;
+  display              : grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows   : 3rem 1rem auto 1rem;
+  margin-left          : 0;
+  padding-left         : 0;
+}
+
+.footer__title,
+.footer__col,
+.footer__bottom {
+  margin: 0 1rem;
+}
+
+.footer__title {
+  color          : var(--ifm-hero-heading-color);
+  font-weight    : bold;
+  display        : flex;
+  flex-direction : column;
+  justify-content: flex-end;
+}
+
+.footer__title h6 {
+  padding: 0;
+  margin : 0;
+}
+
+.footer__hline,
+.footer__hline hr {
+  grid-column  : 1 / 6;
+  padding-left : 0;
+  padding-right: 0;
+  margin       : 0;
+}
+
+.footer__hline hr {
+  margin             : 0.5rem 0;
+  height             : 2px;
+  border-top-style   : none;
+  border-bottom-style: inset;
+  border-bottom-width: 1px;
+}
+
+.max-width-box .footer__col {
+  margin : 0 1rem;
+  padding: 0;
+}
+
+.footer__col:has(img) {
+  padding-top: 0rem;
+}
+
+.footer__items li {
+  padding: 0.25rem 0;
+}
+
+.footer img {
+  max-height: 4rem;
+  max-width : 100%;
+}
+
+#footer-icon-list {
+  margin-top     : 0.5rem;
+  display        : flex;
+  flex-direction : row;
+  justify-content: left;
+  height         : 1.5rem;
+  gap            : 1rem;
+  flex-wrap      : wrap;
+}
+
+#footer-icon-list img {
+  height: 1.5rem;
+}
+
+.footer__hline.big-screen-only {
+  display   : block;
+  margin-top: -1rem;
+}
+
+.footer__hline.small-screen-only {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .footer__links {
+    flex-direction: column;
+    align-items   : stretch;
+  }
+
+  .footer__hline.big-screen-only {
+    display: none;
+  }
+
+  .footer__hline.small-screen-only {
+    display: block;
+  }
+}
+
+.footer__copyright__text {
+  padding: 0;
+}
+
+/* Docusaurus-specific fixes */
+
+.button.button--secondary {
+  color: var(--ifm-font-color-secondary);
+}
+
+.table-of-contents__link--active,
+.table-of-contents__link--active code,
+.table-of-contents__link:hover,
+.table-of-contents__link:hover code {
+  color: var(--ifm-menu-color-active) !important;
+}
+
+.cardContainer_fWXF:hover {
+  border-color: var(--ifm-menu-color-active) !important;
+}
