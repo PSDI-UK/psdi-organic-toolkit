@@ -22,6 +22,38 @@
   <script type="module" src="{{url_for('static', filename='js/cookieconsent-config.js')}}"></script>
 
   <script type="module" src="{{url_for('static', filename='js/psdi-common.js')}}"></script>
+  {% if ga_tag %}
+  {% if service_mode %}
+  <!-- Google tag (gtag.js) -->
+  <script type="text/plain" data-category="analytics" async
+    src="https://www.googletagmanager.com/gtag/js?id={{ ga_tag }}"></script>
+  <script type="text/plain" data-category="analytics">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '{{ ga_tag }}');
+  </script>
+  {% else %}
+  <script type="text/plain" data-category="analytics">
+    // Define gtag as a logging function instead
+    function gtag(type, eventClass, data=null){
+      if (type==="event"){
+        let logStr = "Analytics event of class '" + eventClass + "' triggered";
+        if (!data) {
+          logStr += ".";
+        } else {
+          logStr += " with data:";
+          Object.entries(data).forEach(([key, val]) => {
+            logStr += "\n  " + key + ": " + val;
+          });
+        }
+        console.log(logStr);
+      }
+    }
+  </script>
+  {% endif %}
+  {% endif %}
   {% endblock %}
 </head>
 
