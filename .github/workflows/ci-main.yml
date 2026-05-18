@@ -35,11 +35,11 @@ jobs:
     if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
 
   container-push:
-    if: false
     uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@b4c884a5fbaa96777c26f1ac6d4eac67531e2fc7
     needs: [test-all]
+    if: false
     # Proceed if test-all was successful or skipped
-    if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
+    # if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
     with:
       container_tag: ${{ github.sha }}
       service_name: psdi_organic_toolkit
