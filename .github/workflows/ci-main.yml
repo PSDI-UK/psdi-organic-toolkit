@@ -30,6 +30,8 @@ jobs:
 
   deploy-pages:
     uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/publish-pages.yml@b4c884a5fbaa96777c26f1ac6d4eac67531e2fc7
+    with:
+      render_command: psdi-organic-toolkit-render
     needs: [test-all]
     # Proceed if test-all was successful or skipped
     if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
