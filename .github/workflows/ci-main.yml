@@ -21,10 +21,12 @@ on:
 
 jobs:
   test-all:
-    if: ${{ github.event_name == 'push' || ! github.event.inputs.skip-tests }}
-
-    uses: ./.github/workflows/job-test-main.yml
-    secrets: inherit # pass all secrets for the environment
+    if: github.event_name == 'push' || github.event.inputs.skip-tests == 'false'
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-all.yml@b4c884a5fbaa96777c26f1ac6d4eac67531e2fc7
+    with:
+      source_dir: psdi_glorius_plot
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-pages:
     uses: ./.github/workflows/job-publish-pages.yml
@@ -33,29 +35,33 @@ jobs:
     if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
 
   container-push:
-    uses: ./.github/workflows/job-container-push.yml
-    needs: [test-all]
-    # When ready to enable this step, remove the following line and uncomment the proper condition below it
     if: false
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@b4c884a5fbaa96777c26f1ac6d4eac67531e2fc7
+    needs: [test-all]
     # Proceed if test-all was successful or skipped
-    # if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
+    if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
     with:
       container_tag: ${{ github.sha }}
+      service_name: psdi_organic_toolkit
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+
   # Deploy to Kubernetes Job
   # Requires an environment, which must reflect the target environment as defined in the
   # GitHub repository: https://github.com/PSDI-UK/psdi-organic-toolkit/settings/environments
   # The downstream deploy job leverages on Environment specific secrets, which also must be defined
   # For the tag, we need something unique for each push, so we use the SHA of the latest commit
-  # TODO: Uncomment the below section once the deployment repo is set up
-  # deploy-stfc-dev-k8s:
-  #   needs: [container-push]
-  #   # Proceed if test-all was successful or skipped
-  #   if: always() && (needs.container-push.result == 'success')
-  #   uses: PSDI-UK/psdi-organic-toolkit-deployment/.github/workflows/job-external-deployment.yaml
-  #   with:
-  #     # container_tag
-  #     container_tag: ${{ github.sha }}
-  #     environment: development
-  #   secrets:
-  #     deployment_app_id: ${{ secrets.DEPLOYMENT_APP_ID }}
-  #     deployment_app_private_key: ${{ secrets.DEPLOYMENT_APP_PRIVATE_KEY }}
+  deploy-stfc-dev-k8s:
+    needs: [container-push]
+    # Proceed if test-all was successful or skipped
+    if: always() && (needs.container-push.result == 'success')
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/deploy.yml@b4c884a5fbaa96777c26f1ac6d4eac67531e2fc7
+    with:
+      container_tag: ${{ github.sha }}
+      deployment_repo: psdi-organic-toolkit-deployment
+      environment: development
+      prod: false
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      deployment_app_id: ${{ secrets.DEPLOYMENT_APP_ID }}
+      deployment_app_private_key: ${{ secrets.DEPLOYMENT_APP_PRIVATE_KEY }}
