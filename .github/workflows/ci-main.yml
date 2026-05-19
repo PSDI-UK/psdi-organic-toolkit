@@ -22,22 +22,22 @@ on:
 jobs:
   test-all:
     if: github.event_name == 'push' || github.event.inputs.skip-tests == 'false'
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-all.yml@b4c884a5fbaa96777c26f1ac6d4eac67531e2fc7
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-all.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
     with:
       source_dir: psdi_organic_toolkit
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-pages:
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/publish-pages.yml@b4c884a5fbaa96777c26f1ac6d4eac67531e2fc7
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/publish-pages.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
     with:
-      render_command: psdi-organic-toolkit-render --dev-mode
+      render_command: psdi-organic-toolkit-render
     needs: [test-all]
     # Proceed if test-all was successful or skipped
     if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
 
   container-push:
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@b4c884a5fbaa96777c26f1ac6d4eac67531e2fc7
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
     needs: [test-all]
     if: false
     # Proceed if test-all was successful or skipped
@@ -57,7 +57,7 @@ jobs:
     needs: [container-push]
     # Proceed if test-all was successful or skipped
     if: always() && (needs.container-push.result == 'success')
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/deploy.yml@b4c884a5fbaa96777c26f1ac6d4eac67531e2fc7
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/deploy.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
     with:
       container_tag: ${{ github.sha }}
       deployment_repo: psdi-organic-toolkit-deployment
