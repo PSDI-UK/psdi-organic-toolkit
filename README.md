@@ -2,9 +2,9 @@
 
 [![License Badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This projects provides the code for a Flask-hosted page to provide a hub for Organic Toolkit projects, pointing to the site for each of them.
+This projects provides the code for a Flask-hosted page to provide a hub for Organic Toolkit projects, pointing to the site for each of them.It publishes a service to https://organic-toolkit.psdi.ac.uk
 
-For internal testing, the main branch of this project is published to https://psdi-uk.github.io/psdi-organic-toolkit
+For internal testing, the main branch of this project is published to https://organic-toolkit-dev.psdi.ac.uk, with a staging deployment at https://organic-toolkit-staging.psdi.ac.uk
 
 ## Table of Contents
 
