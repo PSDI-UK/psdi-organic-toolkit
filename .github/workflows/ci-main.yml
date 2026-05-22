@@ -39,9 +39,8 @@ jobs:
   container-push:
     uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
     needs: [test-all]
-    if: false
     # Proceed if test-all was successful or skipped
-    # if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
+    if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
     with:
       container_tag: ${{ github.sha }}
       service_name: psdi_organic_toolkit
@@ -55,7 +54,7 @@ jobs:
   # For the tag, we need something unique for each push, so we use the SHA of the latest commit
   deploy-stfc-dev-k8s:
     needs: [container-push]
-    # Proceed if test-all was successful or skipped
+    # Proceed if container-push was successful
     if: always() && (needs.container-push.result == 'success')
     uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/deploy.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
     with:
