@@ -1,0 +1,29 @@
+{% extends "parent/layout.htm" %}
+
+{% block page_title %}
+Documentation - {{ super() }}
+{% endblock %}
+
+{% block hero_title %}Documentation{% endblock %}
+
+{% block inner_content %}
+<h3>Guidance</h3>
+<p>
+  Guidance for the PSDI Organic Toolkit and its services is available in the <a
+    href="https://guidance.psdi.ac.uk/docusaurus-pages/docs/guidance/psdi-resources/organic-toolkit/">PSDI
+    Knowledge Base</a>.
+</p>
+
+<h3>About</h3>
+<p><strong>PSDI Organic Toolkit</strong><br>
+  {% if service_mode %}Public web service{% else %}Local GUI{%endif %} mode -
+  {% if production_mode %}Production{% else %}Development{%endif %} build <br>
+  {% if tag %}<strong>Version:</strong> {{ tag }}<br>{% endif %}
+  {% if date %}<strong>Last revised:</strong> {{ date }}<br>{% endif %}
+  {% if sha and not production_mode %}<strong>SHA of latest commit:</strong> {{ sha }}<br>{% endif %}
+  <strong>Project source:</strong> <a
+    href="https://github.com/PSDI-UK/psdi-organic-toolkit">https://github.com/PSDI-UK/psdi-organic-toolkit</a><br>
+</p>
+<div class="medGap"></div>
+</form>
+{% endblock %}

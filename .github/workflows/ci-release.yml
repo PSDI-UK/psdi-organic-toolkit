@@ -12,9 +12,15 @@ on:
 
 jobs:
   test-python:
-    uses: ./.github/workflows/job-test-python.yml
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-python.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    with:
+      source_dir: psdi_organic_toolkit
+
   test-gui:
-    uses: ./.github/workflows/job-test-gui.yml
+    name: Run full tests of the gui locally
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-gui.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
 
   # The commented out code below runs a code vulnerability scan on the
   # containerised app. This will not work on the free GitHub plan, since
@@ -27,37 +33,37 @@ jobs:
   # scan.
   #
   #anchore-scan:
-  #  uses: ./.github/workflows/anchore-scan.yml
+  #  uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/anchore-scan.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
   #  needs: [test-package, test-gui]
 
   tag:
-    uses: ./.github/workflows/job-tag.yml
     needs: [test-python, test-gui]
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/tag.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
 
   container-push:
-    uses: ./.github/workflows/job-container-push.yml
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
     needs: [tag]
     with:
       container_tag: ${{ needs.tag.outputs.container_tag }}
-
-  publish-doc:
-    # When ready to enable this step, remove the following line
-    if: false
-    needs: [tag]
-    uses: ./.github/workflows/job-publish-doc.yml
+      service_name: psdi_organic_toolkit
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
 
   # Deploy to Kubernetes Job
   # Requires an environment, which must reflect the target environment as defined in the
-  # GitHub repository: https://github.com/PSDI-UK/psdi_organic_toolkit/settings/environments
+  # GitHub repository: https://github.com/PSDI-UK/psdi_glorius_plot/settings/environments
   # The downstream deploy job leverages on Environment specific secrets, which also must be defined
-  # TODO: Uncomment the below section once the deployment repo is set up
-  # deploy-stfc-staging-k8s:
-  #   needs: [tag, container-push]
-  #   uses: PSDI-UK/psdi-organic-toolkit-deployment/.github/workflows/job-external-deployment.yaml@(REPLACE with commit SHA here)
-  #   with:
-  #     # container_tag
-  #     container_tag: ${{ needs.tag.outputs.container_tag }}
-  #     environment: staging
-  #   secrets:
-  #     deployment_app_id: ${{ secrets.DEPLOYMENT_APP_ID }}
-  #     deployment_app_private_key: ${{ secrets.DEPLOYMENT_APP_PRIVATE_KEY }}
+  deploy-stfc-staging-k8s:
+    needs: [tag, container-push]
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/deploy.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    with:
+      container_tag: ${{ needs.tag.outputs.container_tag }}
+      deployment_repo: psdi-organic-toolkit-deployment
+      environment: staging
+      prod: false
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      deployment_app_id: ${{ secrets.DEPLOYMENT_APP_ID }}
+      deployment_app_private_key: ${{ secrets.DEPLOYMENT_APP_PRIVATE_KEY }}
