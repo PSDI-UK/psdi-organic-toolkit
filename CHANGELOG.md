@@ -1,10 +1,16 @@
 # Changelog for PSDI Organic Toolkit
 
+## v0.1.2
+
+### Miscellaneous Changes
+
+- Changed previous location of site, on GitHub Pages, to redirect to new location
+
 ## v0.1.1
 
 ### Stylistic Change
 
--Pulled updated common assets, adding link to sitemap to footer
+- Pulled updated common assets, adding link to sitemap to footer
 
 ## v0.1.0
 

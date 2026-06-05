@@ -28,14 +28,6 @@ jobs:
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
-  deploy-pages:
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/publish-pages.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
-    with:
-      render_command: psdi-organic-toolkit-render
-    needs: [test-all]
-    # Proceed if test-all was successful or skipped
-    if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
-
   container-push:
     uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
     needs: [test-all]
