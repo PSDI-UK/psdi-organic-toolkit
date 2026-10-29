@@ -1,5 +1,11 @@
 # Changelog for PSDI Organic Toolkit
 
+## v0.1.5
+
+### Miscellaneous changes
+
+- Updated common assets, switching to self-hosting fonts for GDPR compliance
+
 ## v0.1.2
 
 ### Miscellaneous Changes
