@@ -22,14 +22,14 @@ on:
 jobs:
   test-all:
     if: github.event_name == 'push' || github.event.inputs.skip-tests == 'false'
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-all.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-all.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
     with:
       source_dir: psdi_organic_toolkit
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
   container-push:
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
     needs: [test-all]
     # Proceed if test-all was successful or skipped
     if: always() &&  (needs.test-all.result == 'skipped' || needs.test-all.result == 'success')
@@ -48,7 +48,7 @@ jobs:
     needs: [container-push]
     # Proceed if container-push was successful
     if: always() && (needs.container-push.result == 'success')
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/deploy.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/deploy.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
     with:
       container_tag: ${{ github.sha }}
       deployment_repo: psdi-organic-toolkit-deployment

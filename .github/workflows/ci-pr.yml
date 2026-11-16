@@ -19,14 +19,14 @@ on:
 jobs:
   test-python:
     if: github.event.pull_request.draft == false
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-python.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-python.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
     with:
       source_dir: psdi_organic_toolkit
 
   test-gui:
     if: github.event.pull_request.draft == false
     name: Run a simple test of the gui locally
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-gui.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-gui.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
     with:
       simple: true
     secrets:

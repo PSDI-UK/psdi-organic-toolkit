@@ -12,13 +12,13 @@ on:
 
 jobs:
   test-python:
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-python.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-python.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
     with:
       source_dir: psdi_organic_toolkit
 
   test-gui:
     name: Run full tests of the gui locally
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-gui.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/test-gui.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -33,17 +33,17 @@ jobs:
   # scan.
   #
   #anchore-scan:
-  #  uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/anchore-scan.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+  #  uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/anchore-scan.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
   #  needs: [test-package, test-gui]
 
   tag:
     needs: [test-python, test-gui]
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/tag.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/tag.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
   container-push:
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/container-push.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
     needs: [tag]
     with:
       container_tag: ${{ needs.tag.outputs.container_tag }}
@@ -57,7 +57,7 @@ jobs:
   # The downstream deploy job leverages on Environment specific secrets, which also must be defined
   deploy-stfc-staging-k8s:
     needs: [tag, container-push]
-    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/deploy.yml@c0f51fb2cbe8d5e6fcb495549c5eb0063b627558
+    uses: PSDI-UK/psdi-github-workflows-public/.github/workflows/deploy.yml@6077506c3723a31fad3b6ff02c84c16f2a8ffc6c
     with:
       container_tag: ${{ needs.tag.outputs.container_tag }}
       deployment_repo: psdi-organic-toolkit-deployment
